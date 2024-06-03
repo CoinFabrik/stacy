@@ -5,13 +5,13 @@
 - Detectors: [`private-function-not-used`](https://github.com/CoinFabrik/stacy/blob/main/stacks_analyzer/detectors/PrivateFunctionNotUsed.py)
 - Test Cases: [`private-function-not-used`](https://github.com/CoinFabrik/stacy/tree/main/tests/private_function_not_used)
 
-It is not a good practice to have code that is not used in the contract. This can lead to confusion and increase the size of the contract. In addition, it can also create vulnerabilities if a malicious actor finds a way to call the private functions.
+It is not a good practice to have code that is not used. This can lead to confusion and increase the size of the contract. In addition, it can also create vulnerabilities if a malicious actor finds a way to call the private functions.
 
 ## Exploit Scenario
 
-```clarity
+Here we have three  private functions that are not used.
 
-(impl-trait 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait.nft-trait)
+```clarity
 
 (define-constant contract-owner tx-sender)
 (define-constant err-owner-only (err u100))
@@ -57,16 +57,14 @@ It is not a good practice to have code that is not used in the contract. This ca
 ```
 
 
-The vulnerable code example can be found [here]().
+The vulnerable code example can be found [here](https://github.com/CoinFabrik/stacy/blob/main/tests/private_function_not_used/vulnerable-example/read_only_not_used.clar).
 
 ## Remediation
 
-Do not deploy smart contracts with unused code.
+Do not deploy smart contracts with dead code.
 
 
 ```clarity
-
-(impl-trait 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait.nft-trait)
 
 (define-constant contract-owner tx-sender)
 (define-constant err-owner-only (err u100))
@@ -98,8 +96,5 @@ Do not deploy smart contracts with unused code.
 
 ```
 
-The remediated code example can be found [here]().
+The remediated code example can be found [here](https://github.com/CoinFabrik/stacy/blob/main/tests/private_function_not_used/remediated-example/read_only_not_used.clar).
 
-
-## References
-- []()

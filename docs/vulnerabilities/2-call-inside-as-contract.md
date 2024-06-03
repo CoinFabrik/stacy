@@ -21,7 +21,7 @@ In this example, when Contract A calls contractB, the `tx-sender` of contractB w
 
 ```
 
-The vulnerable code example can be found [here]().
+The vulnerable code example can be found [here](https://github.com/CoinFabrik/stacy/blob/main/tests/call_inside_as_contract/vulnerable-example/call_inside_as_contract.clar).
 
 ## Remediation
 
@@ -36,7 +36,7 @@ Use a contract already whitelisted by you instead of letting the user pass an ar
 
 ```
 
-The remediated code example can be found [here]().
+The remediated code example can be found [here](https://github.com/CoinFabrik/stacy/blob/main/tests/call_inside_as_contract/remediated-example/call_inside_as_contract.clar).
 
 
 ## References

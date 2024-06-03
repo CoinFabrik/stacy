@@ -26,7 +26,7 @@ One malicious user can exploit the fact block's height in Stacks is not synchron
 ```
 
 
-The vulnerable code example can be found [here]().
+The vulnerable code example can be found [here](https://github.com/CoinFabrik/stacy/blob/main/tests/assert_block_height/vulnerable-example/assert_block_height.clar).
 
 ## Remediation
 
@@ -42,7 +42,7 @@ The vulnerable code example can be found [here]().
 ```
 
 
-The remediated code example can be found [here]().
+The remediated code example can be found [here](https://github.com/CoinFabrik/stacy/blob/main/tests/assert_block_height/remediated-example/assert_block_height.clar).
 
 
 ## References
