@@ -5,3 +5,4 @@ build/
 package*.json
 node_modules
 report.out
+.idea
