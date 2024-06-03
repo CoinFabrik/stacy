@@ -17,7 +17,7 @@ In `Clarity`, decimals are dropped after an arithmetic operation. This can lead 
 ```
 
 
-The vulnerable code example can be found [here]().
+The vulnerable code example can be found [here](https://github.com/CoinFabrik/stacy/blob/main/tests/divide_before_multiply/vulnerable-example/divide_before_multiply.clar).
 
 ## Remediation
 
@@ -31,7 +31,7 @@ By changing the order, we can avoid losing precision in intermidiate steps.
 ```
 
 
-The remediated code example can be found [here]().
+The remediated code example can be found [here](https://github.com/CoinFabrik/stacy/blob/main/tests/divide_before_multiply/remediated-example/divide_before_multiply.clar).
 
 
 
