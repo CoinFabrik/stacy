@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run Stacy Analyzer
-        uses: coinfabrik/scout-actions@v2.4
+        uses: coinfabrik/stacy-action@v0.0.1
         with:
           target: 'tests/'
 
