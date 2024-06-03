@@ -1,7 +1,7 @@
 # Private Function Not Used
 ## Description
 - Vulnerability Category: `Validations and error handling`
-- Severity: `Minor`
+- Severity: `Enhancement`
 - Detectors: [`private-function-not-used`](https://github.com/CoinFabrik/stacy/blob/main/stacks_analyzer/detectors/PrivateFunctionNotUsed.py)
 - Test Cases: [`private-function-not-used`](https://github.com/CoinFabrik/stacy/tree/main/tests/private_function_not_used)
 

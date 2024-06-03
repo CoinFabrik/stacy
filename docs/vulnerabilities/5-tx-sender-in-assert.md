@@ -1,4 +1,4 @@
-# Tx-Sender in Asserr
+# Tx-Sender in Assert
 ## Description
 - Vulnerability Category: `Authorization`
 - Severity: `Critical`
