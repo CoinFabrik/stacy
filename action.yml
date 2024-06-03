@@ -1,0 +1,15 @@
+name: 'Stacy Analyzer'
+description: 'Runs Stacy Analyzer with provided inputs'
+inputs:
+  target:
+    description: 'Target file to analyze'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.target }}
+  env:
+    INPUT_TARGET: ${{ inputs.target }}
+
+    

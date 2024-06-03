@@ -1,0 +1,27 @@
+name: Build and Run Stacy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
+      repository-projects: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run Stacy Analyzer
+        uses: ./
+        with:
+          target: 'tests/'
+
+      - uses: mshick/add-pr-comment@v2.8.2
+        with:
+          message-path:  ${{ github.workspace }}/report.out

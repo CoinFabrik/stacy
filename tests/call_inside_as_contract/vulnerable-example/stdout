@@ -1,0 +1,6 @@
+====== Linting tests/call_inside_as_contract/vulnerable-example/call_inside_as_contract.clar... ======
+Warning: Use of call-contract? inside an as-contract context.
+   |
+ 2 |     (try! (as-contract (contract-call? contract paramA paramB)))
+   |            ^^^^^^^^^^^
+

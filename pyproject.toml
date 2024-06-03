@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stacy-analyzer"
+description = "Clarity Static Analyzer"
+version = "0.0.1"
+keywords = ["stacks", "auditor", "security", "clarity", "smart-contracts"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Programming Language :: Clarity",
+    "Topic :: Software Development",
+    "Topic :: Utilities"
+]
+requires-python = ">=3.8"
+license.text = "MIT"
+readme = "README.md"
+dependencies = [
+    "tree-sitter~=0.21",
+]
+
+[project.urls]
+Homepage = "https://github.com/coinfabrik/stacy-clarity"
+
+
+[tool.cibuildwheel]
+build = "cp38-*"
+build-frontend = "build"
+
+[project.scripts]
+stacy-analyzer = "stacks_analyzer.stacks_analyzer:main"

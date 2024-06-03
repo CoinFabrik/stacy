@@ -1,0 +1,6 @@
+====== Linting tests/assert_block_height/vulnerable-example/assert_block_height.clar... ======
+Warning: Use of block-height inside a assert
+   |
+ 6 |         (asserts! (> (get expiry nft-asset) block-height) err-expiry-in-past)
+   |          ^^^^^^^^
+

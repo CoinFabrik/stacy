@@ -1,0 +1,7 @@
+__pycache__/
+*.egg-info
+venv/
+build/
+package*.json
+node_modules
+report.out
