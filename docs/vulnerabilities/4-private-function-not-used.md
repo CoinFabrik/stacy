@@ -57,7 +57,7 @@ Here we have three  private functions that are not used.
 ```
 
 
-The vulnerable code example can be found [here](https://github.com/CoinFabrik/stacy/blob/main/tests/private_function_not_used/vulnerable-example/read_only_not_used.clar).
+The vulnerable code example can be found [here](https://github.com/CoinFabrik/stacy/blob/main/tests/private_function_not_used/vulnerable-example/private_function_not_used.clar).
 
 ## Remediation
 
@@ -96,5 +96,5 @@ Do not deploy smart contracts with dead code.
 
 ```
 
-The remediated code example can be found [here](https://github.com/CoinFabrik/stacy/blob/main/tests/private_function_not_used/remediated-example/read_only_not_used.clar).
+The remediated code example can be found [here](https://github.com/CoinFabrik/stacy/blob/main/tests/private_function_not_used/remediated-example/private_function_not_used.clar).
 
