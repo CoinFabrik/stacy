@@ -1,4 +1,4 @@
-# Var Coul Be Constant
+# Var Could Be Constant
 ## Description
 - Vulnerability Category: `Validations and error handling`
 - Severity: `Enhancement`
