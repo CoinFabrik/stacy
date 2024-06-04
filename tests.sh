@@ -25,6 +25,14 @@ for test_case in "$base_dir"/*; do
     done
 done
 
+if [[ -t 1 ]]; then
+    color_start="\e[32m"
+    color_end="\e[0m"
+else
+    color_start="=== "
+    color_end=" ==="
+fi
+
 if ! $diff_found; then
-    echo -e "\e[32mAll tests passed.\e[0m"
+    echo -e "${color_start}All tests passed.${color_end}"
 fi
