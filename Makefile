@@ -45,7 +45,7 @@ test: venv install
 	@echo -e  "${GREEN}======== Testing detectors ========${NC}"
 	./tests.sh
 
-test_ci: venv install
+test_ci: venv
 	@echo -e  "${GREEN}======== Cloning tree-sitter grammar for Clarity ========${NC}"
 	git pull --recurse-submodules && git submodule update
 	@echo -e "${GREEN}======== Installing tree-sitter ========${NC}"
