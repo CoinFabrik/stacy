@@ -59,6 +59,7 @@ Ensure that the submodule is loaded.
 
 ## Documentation
 
+- [Vulnerabilities](https://github.com/CoinFabrik/stacy/tree/main/docs/vulnerabilities)
 
 ## Detectors
 
@@ -81,3 +82,7 @@ We - [CoinFabrik](https://www.coinfabrik.com/) - are a research and development 
 
 Our team has an academic background in computer science and mathematics, with work experience focused on cybersecurity and software development, including academic publications, patents turned into products, and conference presentations. Furthermore, we have an ongoing collaboration on knowledge transfer and open-source projects with the University of Buenos Aires.
 
+## License
+
+
+Stacy is licensed and distributed under a MIT license. [Contact us](https://www.coinfabrik.com/) if you're looking for an exception to the terms.
