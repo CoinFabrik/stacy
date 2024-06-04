@@ -4,7 +4,7 @@ from ..print_message import pretty_print_warn
 from ..visitor import Visitor, NodeIterator
 
 
-class DivideBeforeMultiplyDetector(Visitor):
+class DivideBeforeMultiply(Visitor):
     MSG = "Use of divide inside a multiplication. This could result in a precision loss"
 
     def __init__(self):

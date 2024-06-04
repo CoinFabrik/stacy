@@ -45,6 +45,10 @@ test: venv install
 	@echo -e  "${GREEN}======== Testing detectors ========${NC}"
 	./tests.sh
 
+test_ci: venv install
+	@echo -e  "${GREEN}======== Testing detectors ========${NC}"
+	./tests.sh > $(GITHUB_WORKSPACE)/test.out
+
 fish: venv
 	@echo -e "${BLUE}======== Using Fish shell ========${NC}"
 	. venv/bin/activate.fish && make install

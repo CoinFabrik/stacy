@@ -4,7 +4,7 @@ from ..print_message import pretty_print_warn
 from ..visitor import Visitor, NodeIterator
 
 
-class AssertBlockHeightDetector(Visitor):
+class AssertBlockHeight(Visitor):
     MSG = "Use of block-height inside a assert"
 
     def __init__(self):

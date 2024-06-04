@@ -4,7 +4,7 @@ from ..print_message import pretty_print_warn
 from ..visitor import Visitor, NodeIterator
 
 
-class UnwrapPanicDetector(Visitor):
+class UnwrapPanicUsage(Visitor):
     MSG = "Use of unwrap-panic. Use unwrap! and handle the error."
 
     def __init__(self):
