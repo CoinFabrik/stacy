@@ -7,7 +7,7 @@ process_example() {
     local clar_file=$(find "$example_path" -name "*.clar")
     local expected_output_file="$example_path/stdout"
 
-    stacy-analyzer lint "$clar_file" > output.tmp
+    ./venv/bin/stacy-analyzer lint "$clar_file" > output.tmp
 
     if ! diff -q output.tmp "$expected_output_file" > /dev/null; then
         diff --color output.tmp "$expected_output_file"
@@ -25,6 +25,14 @@ for test_case in "$base_dir"/*; do
     done
 done
 
+if [[ -t 1 ]]; then
+    color_start="\e[32m"
+    color_end="\e[0m"
+else
+    color_start="=== "
+    color_end=" ==="
+fi
+
 if ! $diff_found; then
-    echo -e "\e[32mAll tests passed.\e[0m"
+    echo -e "${color_start}All tests passed.${color_end}"
 fi

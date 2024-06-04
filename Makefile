@@ -45,6 +45,21 @@ test: venv install
 	@echo -e  "${GREEN}======== Testing detectors ========${NC}"
 	./tests.sh
 
+test_ci: venv
+	@echo -e  "${GREEN}======== Cloning tree-sitter grammar for Clarity ========${NC}"
+	git submodule update --init --remote --recursive
+	@echo -e "${GREEN}======== Installing tree-sitter ========${NC}"
+	cd $(PATH1)
+	npm install tree-sitter-cli
+	@echo -e "${GREEN}======== Installing tree-sitter grammar for Clarity ========${NC}"
+	cd $(PATH1) && npx tree-sitter generate
+	rm -fr node_modules
+	./venv/bin/pip install $(PATH1)
+	@echo -e "${GREEN}======== Installing Stacy for Clarity ========${NC}"
+	./venv/bin/pip install $(PATH2)
+	@echo -e  "${GREEN}======== Testing detectors ========${NC}"
+	./tests.sh > $(GITHUB_WORKSPACE)/test.out
+
 fish: venv
 	@echo -e "${BLUE}======== Using Fish shell ========${NC}"
 	. venv/bin/activate.fish && make install

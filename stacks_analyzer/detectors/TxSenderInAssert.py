@@ -4,7 +4,7 @@ from ..print_message import pretty_print_warn
 from ..visitor import Visitor, NodeIterator
 
 
-class TxSenderDetector(Visitor):
+class TxSenderInAssert(Visitor):
     MSG = "Use of tx-sender inside an assert"
 
     def __init__(self):

@@ -1,4 +1,4 @@
-====== Linting tests/tx_sender/vulnerable-example/tx_sender.clar... ======
+====== Linting tests/tx_sender_in_assert/vulnerable-example/tx_sender.clar... ======
 Warning: Use of tx-sender inside an assert
    |
  5 |         (asserts! (is-eq tx-sender contract-owner) err-owner-only)

@@ -1,16 +1,16 @@
-====== Linting tests/read_only_not_used/vulnerable-example/read_only_not_used.clar... ======
+====== Linting tests/private_function_not_used/vulnerable-example/private_function_not_used.clar... ======
+Warning: This private function is not used.
+   |
+ 9 | (define-private (get-last-token-id)
+   | ^
+
 Warning: This private function is not used.
     |
- 11 | (define-private (get-last-token-id)
+ 13 | (define-private (get-token-uri (token-id uint))
     | ^
 
 Warning: This private function is not used.
     |
- 15 | (define-private (get-token-uri (token-id uint))
-    | ^
-
-Warning: This private function is not used.
-    |
- 19 | (define-private (get-owner (token-id uint))
+ 17 | (define-private (get-owner (token-id uint))
     | ^
 
