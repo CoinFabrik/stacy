@@ -1,3 +1,5 @@
+![Tests passing](https://github.com/coinfabrik/stacy/actions/workflows/test.yml/badge.svg)
+
 # STACY - Stacks Static Analyzer for Clarity
 
 Stacy is an open-source static analyzer for Clarity smart contracts. It is intended to assist Clarity smart contract developers and auditors detect common security issues and deviations from best practices. 
