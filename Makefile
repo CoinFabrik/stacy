@@ -47,7 +47,7 @@ test: venv install
 
 test_ci: venv install
 	@echo -e  "${GREEN}======== Cloning tree-sitter grammar for Clarity ========${NC}"
-	git submodule update --recursive
+	git submodule update --init --recursive
 	@echo -e "${GREEN}======== Installing tree-sitter ========${NC}"
 	cd $(PATH1)
 	npm install tree-sitter-cli
