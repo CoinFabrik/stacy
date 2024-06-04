@@ -1,7 +1,7 @@
 # Tx-Sender in Assert
 ## Description
 - Vulnerability Category: `Authorization`
-- Severity: `Critical`
+- Severity: `High`
 - Detectors: [`tx-sender-in-assert`](https://github.com/CoinFabrik/stacy/blob/main/stacks_analyzer/detectors/TxSenderInAssert.py)
 - Test Cases: [`tx-sender-in-assert`](https://github.com/CoinFabrik/stacy/tree/main/tests/tx_sender_in_assert)
 
