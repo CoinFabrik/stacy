@@ -58,7 +58,6 @@ test_ci: venv
 	@echo -e "${GREEN}======== Installing Stacy for Clarity ========${NC}"
 	./venv/bin/pip install $(PATH2)
 	@echo -e  "${GREEN}======== Testing detectors ========${NC}"
-	alias stacy-analyzer="./venv/bin/stacy-analyzer"
 	./tests.sh > $(GITHUB_WORKSPACE)/test.out
 
 fish: venv

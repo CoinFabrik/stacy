@@ -7,7 +7,7 @@ process_example() {
     local clar_file=$(find "$example_path" -name "*.clar")
     local expected_output_file="$example_path/stdout"
 
-    stacy-analyzer lint "$clar_file" > output.tmp
+    ./venv/bin/stacy-analyzer lint "$clar_file" > output.tmp
 
     if ! diff -q output.tmp "$expected_output_file" > /dev/null; then
         diff --color output.tmp "$expected_output_file"
