@@ -10,7 +10,7 @@ Since there is no exact method to measure time events in Stacks blockchain,`Clar
 
 ## Exploit Scenario
 
-One malicious user can exploit the fact block's height in Stacks is not synchronized with the Bitcoin blockchain. (And? Improve)
+One malicious user can exploit the fact block's height in Stacks is not synchronized with the Bitcoin blockchain. 
 
 
 ```clarity
