@@ -3,7 +3,6 @@
 (define-public (transfer (token-id uint) (sender principal) (recipient principal))
 	(begin
 		;; todo: add assert
-		;; false positivetodo comment test
 		(nft-transfer? stacksies token-id sender recipient)
 	)
 )
