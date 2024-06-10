@@ -15,14 +15,14 @@ known_principals = ['ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
                   'ST3NBRSFKX28FQ2ZJ1MAKX58HKHSDGNV5N7R21XCP',
                   'STNHKEPYEPJ8ET55ZZ0M5A34J0R3N5FM2CMMMAZ6',
                   'SPAXYA5XS51713FDTQ8H94EJ4V579CXMTRNBZKSF', #clarity example
-                #transient's address
+                    #transient's address
 
                   'S1G2081040G2081040G2081040G208105NK8PE5'
                    ]
 
 
 class ExcludeHardcodedPrincipals(Visitor):
-    MSG = "It is not recommended to hardcode known principals."
+    MSG = "It is not recommended to hardcode principals that their private key is known."
 
     def __init__(self):
         super().__init__()
