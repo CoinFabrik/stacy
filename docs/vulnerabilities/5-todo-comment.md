@@ -1,6 +1,6 @@
 # TODO comment
 ## Description
-- Vulnerability Category: `Validations and error handling`
+- Vulnerability Category: `Best practices`
 - Severity: `Enhancement`
 - Detectors: [`todo-comment`](https://github.com/CoinFabrik/stacy/blob/main/stacks_analyzer/detectors/ToDoComment.py)
 - Test Cases: [`todo-comment`](https://github.com/CoinFabrik/stacy/tree/main/tests/todo_comment)
