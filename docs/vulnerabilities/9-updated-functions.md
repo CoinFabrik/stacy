@@ -1,6 +1,6 @@
 # Unwrap Panic Usage 
 ## Description
-- Vulnerability Category: `Validations and error handling`
+- Vulnerability Category: `Best practices`
 - Severity: `Enhancement`
 - Detectors: [`updated-functions`](https://github.com/CoinFabrik/stacy/blob/main/stacks_analyzer/detectors/UpdatedFunctionsDetector.py)
 - Test Cases: [`updated-functions](https://github.com/CoinFabrik/stacy/tree/main/tests/updated_functions)

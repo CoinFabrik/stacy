@@ -1,7 +1,7 @@
 from tree_sitter import Node
 
 from ..print_message import pretty_print_warn
-from ..visitor import Visitor, NodeIterator
+from ..visitor import Visitor
 
 
 class UpdatedFunctionsDetector(Visitor):
@@ -15,7 +15,6 @@ class UpdatedFunctionsDetector(Visitor):
     def visit_node(self, node: Node, i):
         if i > 1:
             return
-        
         
         self.fun = str(node.text, "utf-8")
 

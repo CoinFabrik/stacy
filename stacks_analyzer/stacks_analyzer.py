@@ -22,8 +22,9 @@ DETECTOR_MAP = {
     "PrivateFunctionNotUsed": PrivateFunctionNotUsed(),
     "TxSenderInAssert": TxSenderInAssert(),
     "UnwrapPanicUsage": UnwrapPanicUsage(),
-    "VarCouldBeConstant": VarCouldBeConstant(),
     "UpdatedFunctionsDetector": UpdatedFunctionsDetector(),
+    "VarCouldBeConstant": VarCouldBeConstant(),
+    
 }
 
 
