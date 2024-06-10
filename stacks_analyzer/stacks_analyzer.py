@@ -19,10 +19,11 @@ DETECTOR_MAP = {
     "CallInsideAsContract": CallInsideAsContract(),
     "DivideBeforeMultiply": DivideBeforeMultiply(),
     "PrivateFunctionNotUsed": PrivateFunctionNotUsed(),
+    "ToDoComment": ToDoComment(),
     "TxSenderInAssert": TxSenderInAssert(),
     "UnwrapPanicUsage": UnwrapPanicUsage(),
     "VarCouldBeConstant": VarCouldBeConstant(),
-    "ToDoComment": ToDoComment(),
+    
 }
 
 
