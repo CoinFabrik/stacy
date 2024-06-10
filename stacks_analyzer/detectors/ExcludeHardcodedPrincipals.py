@@ -22,19 +22,17 @@ known_principals = ['ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
 
 
 class ExcludeHardcodedPrincipals(Visitor):
-    MSG = "It is not recommended to hardcode principals that their private key is known."
+    MSG = "It is not recommended to hardcode principals for which the private key is known."
 
     def __init__(self):
         super().__init__()
-        self.principal = ""
 
     def visit_node(self, node: Node, i):
         if i > 1:
             return
         
-        self.principal = str(node.text, "utf-8")
-
-        if self.principal in known_principals:
+        principal = str(node.text, "utf-8")
+        if principal in known_principals:
             pretty_print_warn(
                 self,
                 node.parent,
