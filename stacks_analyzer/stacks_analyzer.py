@@ -2,14 +2,16 @@ import os
 import argparse
 import sys
 
-from stacks_analyzer.detectors.VarCouldBeConstant import VarCouldBeConstant
-from .detectors.TxSenderInAssert import TxSenderInAssert
 from .detectors.AssertBlockHeight import AssertBlockHeight
+from .detectors.CallInsideAsContract import CallInsideAsContract
 from .detectors.DivideBeforeMultiply import DivideBeforeMultiply
 from .detectors.PrivateFunctionNotUsed import PrivateFunctionNotUsed
-from .detectors.UnwrapPanicUsage import UnwrapPanicUsage
-from .detectors.CallInsideAsContract import CallInsideAsContract
 from .detectors.ToDoComment import ToDoComment
+from .detectors.TxSenderInAssert import TxSenderInAssert
+from .detectors.UnwrapPanicUsage import UnwrapPanicUsage
+from .detectors.UpdatedFunctionsDetector import UpdatedFunctionsDetector
+from .detectors.VarCouldBeConstant import VarCouldBeConstant
+
 from .print_message import TerminalColors
 
 from .visitor import LinterRunner, Visitor
@@ -22,6 +24,7 @@ DETECTOR_MAP = {
     "ToDoComment": ToDoComment(),
     "TxSenderInAssert": TxSenderInAssert(),
     "UnwrapPanicUsage": UnwrapPanicUsage(),
+    "UpdatedFunctionsDetector": UpdatedFunctionsDetector(),
     "VarCouldBeConstant": VarCouldBeConstant(),
     
 }

@@ -1,0 +1,13 @@
+====== Linting tests/updated_functions/vulnerable-example/updated_functions.clar... ======
+Warning: Behavior of 'element-at' changed from Clarity1 to Clarity2, now outputs optional value.
+Suggestion: use 'element-at?' to make this behavior explicit.
+   |
+ 4 |   (element-at sequence index)
+   |    ^^^^^^^^^^
+
+Warning: Behavior of 'index-of' changed from Clarity1 to Clarity2, now outputs optional value.
+Suggestion: use 'index-of?' to make this behavior explicit.
+   |
+ 8 |   (index-of places elem)
+   |    ^^^^^^^^
+
