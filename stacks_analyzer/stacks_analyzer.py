@@ -9,6 +9,7 @@ from .detectors.DivideBeforeMultiply import DivideBeforeMultiply
 from .detectors.PrivateFunctionNotUsed import PrivateFunctionNotUsed
 from .detectors.UnwrapPanicUsage import UnwrapPanicUsage
 from .detectors.CallInsideAsContract import CallInsideAsContract
+from .detectors.ToDoComment import ToDoComment
 from .print_message import TerminalColors
 
 from .visitor import LinterRunner, Visitor
@@ -18,9 +19,11 @@ DETECTOR_MAP = {
     "CallInsideAsContract": CallInsideAsContract(),
     "DivideBeforeMultiply": DivideBeforeMultiply(),
     "PrivateFunctionNotUsed": PrivateFunctionNotUsed(),
+    "ToDoComment": ToDoComment(),
     "TxSenderInAssert": TxSenderInAssert(),
     "UnwrapPanicUsage": UnwrapPanicUsage(),
     "VarCouldBeConstant": VarCouldBeConstant(),
+    
 }
 
 
