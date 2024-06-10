@@ -1,4 +1,4 @@
-(define-constant places (list 1 2 3 4 5))
+(define-constant places (list u1 u2 u3 u4 u5))
 
 (define-read-only (get-element (sequence (list 5 uint)) (index uint))
   (element-at? sequence index)
