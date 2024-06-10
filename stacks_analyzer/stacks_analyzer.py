@@ -9,6 +9,7 @@ from .detectors.DivideBeforeMultiply import DivideBeforeMultiply
 from .detectors.PrivateFunctionNotUsed import PrivateFunctionNotUsed
 from .detectors.UnwrapPanicUsage import UnwrapPanicUsage
 from .detectors.CallInsideAsContract import CallInsideAsContract
+from .detectors.ExcludeHardcodedPrincipals import ExcludeHardcodedPrincipals
 from .print_message import TerminalColors
 
 from .visitor import LinterRunner, Visitor
@@ -21,6 +22,7 @@ DETECTOR_MAP = {
     "TxSenderInAssert": TxSenderInAssert(),
     "UnwrapPanicUsage": UnwrapPanicUsage(),
     "VarCouldBeConstant": VarCouldBeConstant(),
+    "ExcludeHarcodedPrincipals": ExcludeHardcodedPrincipals(),
 }
 
 

@@ -1,11 +1,10 @@
 from tree_sitter import Node
 
 from ..print_message import pretty_print_warn
-from ..visitor import Visitor, NodeIterator
-from re import match
+from ..visitor import Visitor
 
 #default addresses of Clarity in devnet
-known_addreses = ['ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
+known_principals = ['ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
                   'ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5',
                   'ST2CY5V39NHDPWSXMW9QDT3HC3GD6Q6XX4CFRK9AG',
                   'ST2JHG361ZXG51QTKY2NQCVBPPRRE2KZB1HR05NNC',
@@ -15,42 +14,31 @@ known_addreses = ['ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
                   'ST3PF13W7Z0RRM42A8VZRVFQ75SV1K26RXEP8YGKJ',
                   'ST3NBRSFKX28FQ2ZJ1MAKX58HKHSDGNV5N7R21XCP',
                   'STNHKEPYEPJ8ET55ZZ0M5A34J0R3N5FM2CMMMAZ6',
+                  'SPAXYA5XS51713FDTQ8H94EJ4V579CXMTRNBZKSF', #clarity example
                 #transient's address
 
                   'S1G2081040G2081040G2081040G208105NK8PE5'
                    ]
 
-class CallInsideAsContract(Visitor):
-    MSG = "It is not recommended to hardcode known principals"
-    checked: []
-    pattern = "[A-Z0-9]{39}" 
+
+class ExcludeHardcodedPrincipals(Visitor):
+    MSG = "It is not recommended to hardcode known principals."
 
     def __init__(self):
         super().__init__()
-        self.call = False
-
+        self.principal = ""
 
     def visit_node(self, node: Node, i):
-        if i == 1 :
+        if i > 1:
             return
         
-        # if str(node.text, "utf8") == "as-contract":
-        #     descendants = NodeIterator(node.parent)
-        #     while True:
-        #         n = descendants.next()
-        #         if n is None:
-        #             break
-        #         if str(n.text, "utf8") == "contract-call?":
-        #             self.call = True
-        #         if n.grammar_name == "contract_principal_lit":
-        #             self.lit = True
-        #     if self.call and not self.lit:
-        #         pretty_print_warn(
-        #             self,
-        #             node.parent,
-        #             node,
-        #             self.MSG,
-        #             None
-        #         )
-        #         self.call = False
-        #         self.lit = False
+        self.principal = str(node.text, "utf-8")
+
+        if self.principal in known_principals:
+            pretty_print_warn(
+                self,
+                node.parent,
+                node,
+                self.MSG,
+                None
+            )
