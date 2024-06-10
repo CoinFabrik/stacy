@@ -1,0 +1,12 @@
+====== Linting tests/known-principals/vulnerable-example/known_principals.clar... ======
+Warning: It is not recommended to hardcode known principals.
+   |
+ 2 | (ft-mint? stackaroo u100 'SPAXYA5XS51713FDTQ8H94EJ4V579CXMTRNBZKSF) ;; Returns (ok true)
+   |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: It is not recommended to hardcode known principals.
+   |
+ 3 | (ft-burn? stackaroo u50 'SPAXYA5XS51713FDTQ8H94EJ4V579CXMTRNBZKSF) ;; Returns (ok true)
+   |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+

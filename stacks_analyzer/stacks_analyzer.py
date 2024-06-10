@@ -9,7 +9,7 @@ from .detectors.DivideBeforeMultiply import DivideBeforeMultiply
 from .detectors.PrivateFunctionNotUsed import PrivateFunctionNotUsed
 from .detectors.UnwrapPanicUsage import UnwrapPanicUsage
 from .detectors.CallInsideAsContract import CallInsideAsContract
-from .detectors.ExcludeHardcodedPrincipals import ExcludeHardcodedPrincipals
+from .detectors.KnownPrincipals import KnownPrincipals
 from .print_message import TerminalColors
 
 from .visitor import LinterRunner, Visitor
@@ -18,11 +18,12 @@ DETECTOR_MAP = {
     "AssertBlockHeight": AssertBlockHeight(),
     "CallInsideAsContract": CallInsideAsContract(),
     "DivideBeforeMultiply": DivideBeforeMultiply(),
+    "KnownPrincipals": KnownPrincipals(),
     "PrivateFunctionNotUsed": PrivateFunctionNotUsed(),
     "TxSenderInAssert": TxSenderInAssert(),
     "UnwrapPanicUsage": UnwrapPanicUsage(),
     "VarCouldBeConstant": VarCouldBeConstant(),
-    "ExcludeHarcodedPrincipals": ExcludeHardcodedPrincipals(),
+    
 }
 
 
