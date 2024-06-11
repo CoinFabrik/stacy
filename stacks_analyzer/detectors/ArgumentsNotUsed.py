@@ -7,24 +7,44 @@ from ..visitor import Visitor, NodeIterator
 
 class ArgumentsNotUsed(Visitor):
     MSG = "This function receives arguments that are never used."
-    
-    #read_only_names: [Node] = []
 
     def __init__(self):
         super().__init__()
 
     def visit_node(self, node: Node, run_number: int):
-        #si estoy en una funcion
+
+        arguments = {}
         if run_number == 1 and node.grammar_name in ["private_function", "read_only_function", "public_function"]:
-            body = node.text.decode("utf-8") #body function text
-            signature = node.child(2) #save function signature
 
-            # signature.child_count - 1 because the las child is ')'
-            for i in range(1, signature.child_count - 1):
-                print(signature.child(i).text, "signature child")
-                if i != 1:
-                    identifier = signature.child(i).child(1)
+            descendants = NodeIterator(node.parent)
 
-                    print(identifier.text, "identifier text~")
+            while True:
+                n = descendants.next()
+                if n is None:
+                    break
+                
+                if n.grammar_name == "function_parameter":
+                    key = n.child(1).text.decode("utf-8") #name       
+                    arguments[key] = (0, n.child(1))
+
+                
+                if n.grammar_name == "identifier":
+                    key = n.text.decode("utf-8")
+
+                    if key in arguments:
+                        updated_tuple = arguments[key]
+                        updated_tuple = (updated_tuple[0] + 1, updated_tuple[1])
+                        arguments[key] = updated_tuple
+
+                    
+            for k, v in arguments.items():
+                if v[0] == 0:
+                    pretty_print_warn(
+                        self,
+                        v[1],
+                        v[1],
+                        f"'{k}' argument is not used." ,
+                        None
+                    )
 
             
