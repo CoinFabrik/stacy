@@ -26,7 +26,6 @@ DETECTOR_MAP = {
     "UnwrapPanicUsage": UnwrapPanicUsage(),
     "UpdatedFunctionsDetector": UpdatedFunctionsDetector(),
     "VarCouldBeConstant": VarCouldBeConstant(),
-    
 }
 
 
@@ -40,14 +39,13 @@ def main():
     lint_parser.add_argument("--exclude", nargs="+", type=str, help="Comma-separated list of detector names to exclude")
     list_detectors = subparsers.add_parser("detectors", help="List detectors")
 
-    args = arg_parser.parse_args()
 
-    filters = args.filter or list(DETECTOR_MAP.keys())
-    excludes = args.exclude or []
-    detectors = get_detectors(filters, excludes)
-
-    if args.command == "lint":
-        path = args.path
+    user_args = arg_parser.parse_args()
+    if user_args.command == "lint":
+        filters = user_args.filter or list(DETECTOR_MAP.keys())
+        excludes = user_args.exclude or []
+        detectors = get_detectors(filters, excludes)
+        path = user_args.path
         if path.endswith(".clar"):
             lint_file(path, detectors)
         else:
@@ -56,7 +54,7 @@ def main():
                     if file.endswith(".clar"):
                         lint_file(os.path.join(root, file), detectors)
 
-    if args.command == "detectors":
+    if user_args.command == "detectors":
         detectors = list(DETECTOR_MAP.keys())
 
         max_length = max(len(st) for st in detectors)

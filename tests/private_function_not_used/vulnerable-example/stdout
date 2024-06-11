@@ -3,14 +3,17 @@ Warning: This private function is not used.
    |
  9 | (define-private (get-last-token-id)
    | ^
+   Note: Consider removing it.
 
 Warning: This private function is not used.
     |
  13 | (define-private (get-token-uri (token-id uint))
     | ^
+    Note: Consider removing it.
 
 Warning: This private function is not used.
     |
  17 | (define-private (get-owner (token-id uint))
     | ^
+    Note: Consider removing it.
 

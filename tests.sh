@@ -21,6 +21,7 @@ base_dir="tests"
 
 for test_case in "$base_dir"/*; do
     for example in "$test_case"/*; do
+        echo "Testing detectors in" "$example"
         process_example "$example"
     done
 done

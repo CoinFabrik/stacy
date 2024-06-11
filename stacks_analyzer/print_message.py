@@ -18,7 +18,7 @@ class TerminalColors:
     UNDERLINE = '\033[4m'
 
 
-def pretty_print_warn(visitor: Visitor, parent: Node, specific_node: Node, msg: str, help_msg: str | None):
+def pretty_print_warn(visitor: Visitor, parent: Node, specific_node: Node, msg: str, help_msg: str | None, footnote: str | None):
     line_number = parent.start_point.row + 1
     num_size_spaces = " " * (int(math.log10(line_number)) + 2)
     contract_code = visitor.source.split('\n')[line_number - 1]
@@ -43,5 +43,13 @@ def pretty_print_warn(visitor: Visitor, parent: Node, specific_node: Node, msg: 
 
     if help_msg is not None:
         print(f" {num_size_spaces}|{spaces}{help_msg}")
+
+    if footnote is not None:
+        if tty:
+            print(f" {num_size_spaces}{TerminalColors.OKCYAN}Note:{TerminalColors.ENDC}{footnote}")
+        else:
+            print(f" {num_size_spaces}Note: {footnote}")
     print()
+
+
 

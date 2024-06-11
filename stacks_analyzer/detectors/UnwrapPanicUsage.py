@@ -5,7 +5,7 @@ from ..visitor import Visitor, NodeIterator
 
 
 class UnwrapPanicUsage(Visitor):
-    MSG = "Use of unwrap-panic. Use unwrap! and handle the error."
+    MSG = "Use of unwrap-panic."
 
     def __init__(self):
         super().__init__()
@@ -19,6 +19,7 @@ class UnwrapPanicUsage(Visitor):
                 node.parent,
                 node,
                 self.MSG,
-                None
+                None,
+                "Use unwrap! and handle the error."
             )
 

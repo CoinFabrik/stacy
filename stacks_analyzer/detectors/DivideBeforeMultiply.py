@@ -5,7 +5,8 @@ from ..visitor import Visitor, NodeIterator
 
 
 class DivideBeforeMultiply(Visitor):
-    MSG = "Use of divide inside a multiplication. This could result in a precision loss"
+    MSG = "Use of divide inside a multiplication. This could result in a precision loss."
+    NOTE = "Try multiplication before division."
 
     def __init__(self):
         super().__init__()
@@ -25,5 +26,6 @@ class DivideBeforeMultiply(Visitor):
                         node.parent,
                         node,
                         self.MSG,
-                        None
+                        None,
+                        self.NOTE,
                     )

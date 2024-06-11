@@ -1,6 +1,7 @@
 ====== Linting tests/divide_before_multiply/vulnerable-example/divide_before_multiply.clar... ======
-Warning: Use of divide inside a multiplication. This could result in a precision loss
+Warning: Use of divide inside a multiplication. This could result in a precision loss.
    |
  4 |     (* (/ prize participants) bonus)
    |      ^
+   Note: Try multiplication before division.
 

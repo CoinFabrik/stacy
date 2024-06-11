@@ -1,6 +1,7 @@
 ====== Linting tests/unwrap_panic_usage/vulnerable-example/unwrap_panic.clar... ======
-Warning: Use of unwrap-panic. Use unwrap! and handle the error.
+Warning: Use of unwrap-panic.
    |
  4 |         (listing (unwrap-panic (map-get? listings listing-id) err-unknown-listing))
    |                   ^^^^^^^^^^^^
+   Note: Use unwrap! and handle the error.
 
