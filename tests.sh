@@ -21,6 +21,9 @@ base_dir="tests"
 
 for test_case in "$base_dir"/*; do
     for example in "$test_case"/*; do
+        if [[ -t 1 ]]; then
+          echo "Testing detectors in" "$example"
+        fi
         process_example "$example"
     done
 done

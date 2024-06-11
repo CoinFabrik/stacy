@@ -5,7 +5,8 @@ from ..visitor import Visitor, NodeIterator
 
 
 class AssertBlockHeight(Visitor):
-    MSG = "Use of block-height inside a assert"
+    MSG = "Use of block-height inside a assert."
+    HELP = "Consider using burn-block-height."
 
     def __init__(self):
         super().__init__()
@@ -25,6 +26,7 @@ class AssertBlockHeight(Visitor):
                         node.parent,
                         node,
                         self.MSG,
-                        None
+                        None,
+                        self.HELP
                     )
                     break

@@ -25,7 +25,8 @@ class TxSenderInAssert(Visitor):
                         node.parent,
                         node,
                         self.MSG,
-                        None
+                        None,
+                        "Consider using contract-caller"
                     )
                     break
 

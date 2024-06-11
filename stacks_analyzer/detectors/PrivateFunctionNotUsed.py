@@ -39,6 +39,7 @@ class PrivateFunctionNotUsed(Visitor):
                     n,
                     n,
                     self.MSG,
-                    None
+                    None,
+                    "Consider removing it."
                 )
             self.read_only_names = []
