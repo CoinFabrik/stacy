@@ -11,12 +11,14 @@ from .detectors.TxSenderInAssert import TxSenderInAssert
 from .detectors.UnwrapPanicUsage import UnwrapPanicUsage
 from .detectors.UpdatedFunctionsDetector import UpdatedFunctionsDetector
 from .detectors.VarCouldBeConstant import VarCouldBeConstant
+from .detectors.ArgumentsNotUsed import ArgumentsNotUsed
 
 from .print_message import TerminalColors
 
 from .visitor import LinterRunner, Visitor
 
 DETECTOR_MAP = {
+    "ArgumentsNotUsed:": ArgumentsNotUsed(),
     "AssertBlockHeight": AssertBlockHeight(),
     "CallInsideAsContract": CallInsideAsContract(),
     "DivideBeforeMultiply": DivideBeforeMultiply(),
