@@ -14,11 +14,7 @@ class TxSenderInAssert(Visitor):
         if i > 1:
             return
         if str(node.text, "utf8") == "asserts!":
-            descendants = NodeIterator(node.parent)
-            while True:
-                n = descendants.next()
-                if n is None:
-                    break
+            for n in NodeIterator(node.parent):
                 if str(n.text, "utf8") == "tx-sender" and n.grammar_name == "global":
                     pretty_print_warn(
                         self,

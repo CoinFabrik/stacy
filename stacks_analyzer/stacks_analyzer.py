@@ -11,9 +11,7 @@ from .detectors.TxSenderInAssert import TxSenderInAssert
 from .detectors.UnwrapPanicUsage import UnwrapPanicUsage
 from .detectors.UpdatedFunctionsDetector import UpdatedFunctionsDetector
 from .detectors.VarCouldBeConstant import VarCouldBeConstant
-
 from .print_message import TerminalColors
-
 from .visitor import LinterRunner, Visitor
 
 DETECTOR_MAP = {
@@ -39,7 +37,6 @@ def main():
     lint_parser.add_argument("--exclude", nargs="+", type=str, help="Comma-separated list of detector names to exclude")
     list_detectors = subparsers.add_parser("detectors", help="List detectors")
 
-
     user_args = arg_parser.parse_args()
     if user_args.command == "lint":
         filters = user_args.filter or list(DETECTOR_MAP.keys())
@@ -60,19 +57,12 @@ def main():
         max_length = max(len(st) for st in detectors)
         s = max_length // 2 - 4
 
-        if sys.stdout.isatty():
-            color = TerminalColors.OKCYAN
-            end = TerminalColors.ENDC
-        else:
-            color = ""
-            end = ""
+        print(f" {TerminalColors.OKCYAN}┌" + "─" * (s - 1) + " Detectors " + "─" * s + f"┐{TerminalColors.ENDC}")
+        for file in detectors:
+            print(
+                f" {TerminalColors.OKCYAN}|{TerminalColors.ENDC} {file.ljust(max_length + 1)}{TerminalColors.OKCYAN}|{TerminalColors.ENDC}")
+        print(f" {TerminalColors.OKCYAN}└" + "─" * (max_length + 2) + f"┘{TerminalColors.ENDC}")
 
-        if sys.stdout.isatty():
-            print(f" {color}┌" + "─" * (s - 1) + " Detectors " + "─" * s + f"┐{end}")
-            for file in detectors:
-                print(
-                    f" {color}|{end} {file.ljust(max_length + 1)}{color}|{end}")
-            print(f" {color}└" + "─" * (max_length + 2) + f"┘{end}")
 
 def get_detectors(filters: str, excludes):
     all_detectors = list(DETECTOR_MAP.keys())
@@ -99,14 +89,8 @@ def get_detectors(filters: str, excludes):
     return detectors
 
 
-
 def lint_file(path, lints: [Visitor]):
-    tty = sys.stdout.isatty()
-    if tty:
-        print(f"{TerminalColors.HEADER}====== Linting {path}... ======{TerminalColors.ENDC}")
-
-    else:
-        print(f"====== Linting {path}... ======")
+    print(f"{TerminalColors.HEADER}====== Linting {path}... ======{TerminalColors.ENDC}")
 
     with open(path, 'r') as file:
         source = file.read()
