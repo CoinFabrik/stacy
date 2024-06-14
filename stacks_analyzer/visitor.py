@@ -35,7 +35,7 @@ class NodeIterator:
         while True:
             node = self.node()
 
-            if not self.visited.__contains__(node):
+            if node not in self.visited:
                 if self.cursor.goto_first_child():
                     continue
                 self.visited.append(node)
@@ -54,6 +54,15 @@ class NodeIterator:
 
     def node(self) -> Node | None:
         return self.cursor.node
+
+    def __iter__(self):
+        return self
+
+    def __next__(self) -> Node | None:
+        node = self.next()
+        if node is None:
+            raise StopIteration
+        return node
 
 
 class LinterRunner:

@@ -17,11 +17,7 @@ class CallInsideAsContract(Visitor):
         if i > 1:
             pass
         if str(node.text, "utf8") == "as-contract":
-            descendants = NodeIterator(node.parent)
-            while True:
-                n = descendants.next()
-                if n is None:
-                    break
+            for n in NodeIterator(node.parent):
                 if str(n.text, "utf8") == "contract-call?":
                     self.call = True
                 if n.grammar_name == "contract_principal_lit":

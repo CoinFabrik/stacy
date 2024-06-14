@@ -15,11 +15,7 @@ class DivideBeforeMultiply(Visitor):
         if i > 1:
             return
         if node.grammar_name == "native_identifier" and str(node.text, "utf8") == "*":
-            descendants = NodeIterator(node.parent)
-            while True:
-                n = descendants.next()
-                if n is None:
-                    break
+            for n in NodeIterator(node.parent):
                 if str(n.text, "utf8") == "/" and n.grammar_name == "native_identifier":
                     pretty_print_warn(
                         self,

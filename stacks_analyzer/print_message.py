@@ -5,17 +5,18 @@ from tree_sitter import Node
 
 from .visitor import Visitor
 
+tty = sys.stdout.isatty()
 
 class TerminalColors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+    HEADER = '\033[95m' if tty else ''
+    OKBLUE = '\033[94m' if tty else ''
+    OKCYAN = '\033[96m' if tty else ''
+    OKGREEN = '\033[92m' if tty else ''
+    WARNING = '\033[93m' if tty else ''
+    FAIL = '\033[91m' if tty else ''
+    ENDC = '\033[0m' if tty else ''
+    BOLD = '\033[1m' if tty else ''
+    UNDERLINE = '\033[4m' if tty else ''
 
 
 def pretty_print_warn(visitor: Visitor, parent: Node, specific_node: Node, msg: str, help_msg: str | None, footnote: str | None):
@@ -28,27 +29,16 @@ def pretty_print_warn(visitor: Visitor, parent: Node, specific_node: Node, msg: 
     arrows = "^" * (specific_node.end_point.column - specific_node.start_point.column)
     spaces = " " * ((specific_node.start_point.column * start_tabs) + 1)
 
-    tty = sys.stdout.isatty()
+    print(f"{TerminalColors.OKCYAN}Warning:{TerminalColors.ENDC} {msg}")
 
-    if tty:
-        print(f"{TerminalColors.OKCYAN}Warning:{TerminalColors.ENDC} {msg}")
-    else:
-        print(f"Warning: {msg}")
     print(f" {num_size_spaces}|")
     print(f" {line_number} | {contract_code}")
-    if tty:
-        print(f" {num_size_spaces}|{spaces}{TerminalColors.OKCYAN}{arrows}{TerminalColors.ENDC}")
-    else:
-        print(f" {num_size_spaces}|{spaces}{arrows}")
-
+    print(f" {num_size_spaces}|{spaces}{TerminalColors.OKCYAN}{arrows}{TerminalColors.ENDC}")
     if help_msg is not None:
         print(f" {num_size_spaces}|{spaces}{help_msg}")
-
     if footnote is not None:
-        if tty:
-            print(f" {num_size_spaces}{TerminalColors.OKCYAN}Note:{TerminalColors.ENDC}{footnote}")
-        else:
-            print(f" {num_size_spaces}Note: {footnote}")
+        print(f" {num_size_spaces}{TerminalColors.OKCYAN}Note: {TerminalColors.ENDC}{footnote}")
+
     print()
 
 
