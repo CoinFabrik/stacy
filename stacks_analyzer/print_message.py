@@ -7,19 +7,15 @@ from .visitor import Visitor
 
 tty = sys.stdout.isatty()
 
+
 class TerminalColors:
     HEADER = '\033[95m' if tty else ''
-    OKBLUE = '\033[94m' if tty else ''
     OKCYAN = '\033[96m' if tty else ''
-    OKGREEN = '\033[92m' if tty else ''
-    WARNING = '\033[93m' if tty else ''
-    FAIL = '\033[91m' if tty else ''
     ENDC = '\033[0m' if tty else ''
-    BOLD = '\033[1m' if tty else ''
-    UNDERLINE = '\033[4m' if tty else ''
 
 
-def pretty_print_warn(visitor: Visitor, parent: Node, specific_node: Node, msg: str, help_msg: str | None, footnote: str | None):
+def pretty_print_warn(visitor: Visitor, parent: Node, specific_node: Node, msg: str, help_msg: str | None,
+                      footnote: str | None):
     line_number = parent.start_point.row + 1
     num_size_spaces = " " * (int(math.log10(line_number)) + 2)
     contract_code = visitor.source.split('\n')[line_number - 1]
@@ -40,6 +36,3 @@ def pretty_print_warn(visitor: Visitor, parent: Node, specific_node: Node, msg: 
         print(f" {num_size_spaces}{TerminalColors.OKCYAN}Note: {TerminalColors.ENDC}{footnote}")
 
     print()
-
-
-

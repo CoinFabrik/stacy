@@ -57,19 +57,12 @@ def main():
         max_length = max(len(st) for st in detectors)
         s = max_length // 2 - 4
 
-        if sys.stdout.isatty():
-            color = TerminalColors.OKCYAN
-            end = TerminalColors.ENDC
-        else:
-            color = ""
-            end = ""
+        print(f" {TerminalColors.OKCYAN}┌" + "─" * (s - 1) + " Detectors " + "─" * s + f"┐{TerminalColors.ENDC}")
+        for file in detectors:
+            print(
+                f" {TerminalColors.OKCYAN}|{TerminalColors.ENDC} {file.ljust(max_length + 1)}{TerminalColors.OKCYAN}|{TerminalColors.ENDC}")
+        print(f" {TerminalColors.OKCYAN}└" + "─" * (max_length + 2) + f"┘{TerminalColors.ENDC}")
 
-        if sys.stdout.isatty():
-            print(f" {TerminalColors.OKCYAN}┌" + "─" * (s - 1) + " Detectors " + "─" * s + f"┐{TerminalColors.ENDC}")
-            for file in detectors:
-                print(
-                    f" {TerminalColors.OKCYAN}|{TerminalColors.ENDC} {file.ljust(max_length + 1)}{TerminalColors.OKCYAN}|{TerminalColors.ENDC}")
-            print(f" {TerminalColors.OKCYAN}└" + "─" * (max_length + 2) + f"┘{TerminalColors.ENDC}")
 
 def get_detectors(filters: str, excludes):
     all_detectors = list(DETECTOR_MAP.keys())
@@ -96,11 +89,8 @@ def get_detectors(filters: str, excludes):
     return detectors
 
 
-
 def lint_file(path, lints: [Visitor]):
-
     print(f"{TerminalColors.HEADER}====== Linting {path}... ======{TerminalColors.ENDC}")
-
 
     with open(path, 'r') as file:
         source = file.read()
