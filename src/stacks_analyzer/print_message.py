@@ -3,7 +3,7 @@ import sys
 
 from tree_sitter import Node
 
-from .visitor import Visitor
+from stacks_analyzer.visitor import Visitor
 
 tty = sys.stdout.isatty()
 
