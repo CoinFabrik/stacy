@@ -17,12 +17,15 @@ class AssertBlockHeight(Visitor):
         if str(node.text, "utf8") == "asserts!":
             for n in NodeIterator(node.parent):
                 if str(n.text, "utf8") == "block-height" and n.grammar_name == "global":
-                    pretty_print_warn(
-                        self,
-                        node.parent,
-                        node,
-                        self.MSG,
-                        None,
-                        self.HELP
-                    )
+                    # pretty_print_warn(
+                    #     self,
+                    #     node.parent,
+                    #     node,
+                    #     self.MSG,
+                    #     None,
+                    #     self.HELP
+                    # )
+                    self.add_finding(node.parent, self.HELP, self.MSG)
+                    # o
+                    #self.add_finding(node.parent, self.MSG, self.HELP)
                     break

@@ -18,12 +18,12 @@ class UpdatedFunctionsDetector(Visitor):
 
         if fun in self.functions_updated:
             MSG = f"Behavior of '{fun}' changed from Clarity1 to Clarity2, now outputs optional value."
-            pretty_print_warn(
-                self,
-                node.parent,
-                node,
-                MSG,
-                None,
-                f"Suggestion: use '{fun}?' to make this behavior explicit."
-            )
-
+            # pretty_print_warn(
+            #     self,
+            #     node.parent,
+            #     node,
+            #     MSG,
+            #     None,
+            #     f"Suggestion: use '{fun}?' to make this behavior explicit."
+            # )
+            self.add_finding(node.parent, MSG, f"Suggestion: use '{fun}?' to make this behavior explicit.")

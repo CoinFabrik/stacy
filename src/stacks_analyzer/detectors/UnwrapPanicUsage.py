@@ -14,12 +14,13 @@ class UnwrapPanicUsage(Visitor):
         if i > 1:
             return
         if node.grammar_name == "unwrap-panic":
-            pretty_print_warn(
-                self,
-                node.parent,
-                node,
-                self.MSG,
-                None,
-                "Use unwrap! and handle the error."
-            )
+            # pretty_print_warn(
+            #     self,
+            #     node.parent,
+            #     node,
+            #     self.MSG,
+            #     None,
+            #     "Use unwrap! and handle the error."
+            # )
+            self.add_finding(node.parent, self.MSG, "Use unwrap! and handle the error.")
 

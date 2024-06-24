@@ -17,11 +17,12 @@ class DivideBeforeMultiply(Visitor):
         if node.grammar_name == "native_identifier" and str(node.text, "utf8") == "*":
             for n in NodeIterator(node.parent):
                 if str(n.text, "utf8") == "/" and n.grammar_name == "native_identifier":
-                    pretty_print_warn(
-                        self,
-                        node.parent,
-                        node,
-                        self.MSG,
-                        None,
-                        self.NOTE,
-                    )
+                    # pretty_print_warn(
+                    #     self,
+                    #     node.parent,
+                    #     node,
+                    #     self.MSG,
+                    #     None,
+                    #     self.NOTE,
+                    # )
+                    self.add_finding(node.parent, self.MSG, self.NOTE)

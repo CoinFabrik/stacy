@@ -24,14 +24,15 @@ class CallInsideAsContract(Visitor):
                     self.lit = True
 
             if (self.call and not self.lit) and node not in self.checked:
-                pretty_print_warn(
-                    self,
-                    node.parent,
-                    node,
-                    self.MSG,
-                    None,
-                    None
-                )
+                # pretty_print_warn(
+                #     self,
+                #     node.parent,
+                #     node,
+                #     self.MSG,
+                #     None,
+                #     None
+                # )
+                self.add_finding(node.parent, self.MSG, None)
                 self.checked.append(node)
 
         self.call = False

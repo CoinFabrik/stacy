@@ -14,12 +14,13 @@ class ToDoComment(Visitor):
 
         if run_number == 1 and node.grammar_name == "comment":
             if "todo" in node.text.decode("utf-8").lower():
-                pretty_print_warn(
-                    self,
-                    node,
-                    node,
-                    self.MSG,
-                    None,
-                    None
-                )
+                # pretty_print_warn(
+                #     self,
+                #     node,
+                #     node,
+                #     self.MSG,
+                #     None,
+                #     None
+                # )
+                self.add_finding(node, self.MSG, None)
 

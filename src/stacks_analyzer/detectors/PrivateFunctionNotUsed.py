@@ -34,12 +34,13 @@ class PrivateFunctionNotUsed(Visitor):
 
         if run_number == 3:
             for n in self.private_fns_names:
-                pretty_print_warn(
-                    self,
-                    n,
-                    n,
-                    self.MSG,
-                    None,
-                    "Consider removing it."
-                )
+                # pretty_print_warn(
+                #     self,
+                #     n,
+                #     n,
+                #     self.MSG,
+                #     None,
+                #     "Consider removing it."
+                # )
+                self.add_finding(n, self.MSG, None)
             self.private_fns_names = []

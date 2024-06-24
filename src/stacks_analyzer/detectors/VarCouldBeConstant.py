@@ -26,12 +26,13 @@ class VarCouldBeConstant(Visitor):
 
         if i == 3:
             for n in self.data_vars:
-                pretty_print_warn(
-                    self,
-                    n,
-                    n,
-                    self.MSG,
-                    None,
-                    None
-                )
+                # pretty_print_warn(
+                #     self,
+                #     n,
+                #     n,
+                #     self.MSG,
+                #     None,
+                #     None
+                # )
+                self.add_finding(n, self.MSG, None)
             self.data_vars = []
