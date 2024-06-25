@@ -4,4 +4,4 @@ from .analyzer import *
 
 
 def main():
-    print("......")
+    Analyzer().main()

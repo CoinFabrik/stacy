@@ -1,17 +1,17 @@
-
 from tree_sitter import Node
-
-from ..print_message import pretty_print_warn
-from ..visitor import Visitor, NodeIterator
+from stacy_analyzer.visitor import Visitor, NodeIterator
 
 
 class PrivateFunctionNotUsed(Visitor):
-    MSG = "This private function is not used."
+
     private_fns_names: [Node] = []
 
     def __init__(self):
         super().__init__()
         self.private_fns_names: [Node] = []
+        self.MSG = "This private function is not used."
+        self.FOOTNOTE = "Consider removing it."
+        self.HELP = None
 
     def visit_node(self, node: Node, run_number: int):
         if run_number == 1 and node.grammar_name == "private_function":
@@ -34,13 +34,5 @@ class PrivateFunctionNotUsed(Visitor):
 
         if run_number == 3:
             for n in self.private_fns_names:
-                # pretty_print_warn(
-                #     self,
-                #     n,
-                #     n,
-                #     self.MSG,
-                #     None,
-                #     "Consider removing it."
-                # )
-                self.add_finding(n, self.MSG, None)
+                self.add_finding(n, n)
             self.private_fns_names = []

@@ -1,17 +1,17 @@
 from tree_sitter import Node
-
-from ..print_message import pretty_print_warn
-from ..visitor import Visitor, NodeIterator
+from stacy_analyzer.visitor import Visitor, NodeIterator
 
 
 class CallInsideAsContract(Visitor):
-    MSG = "Use of call-contract? inside an as-contract context."
 
     def __init__(self):
         super().__init__()
         self.call = False
         self.lit = False
         self.checked = []
+        self.MSG = "Use of call-contract? inside an as-contract context."
+        self.HELP = None
+        self.FOOTNOTE = None
 
     def visit_node(self, node: Node, i):
         if i > 1:
@@ -24,15 +24,7 @@ class CallInsideAsContract(Visitor):
                     self.lit = True
 
             if (self.call and not self.lit) and node not in self.checked:
-                # pretty_print_warn(
-                #     self,
-                #     node.parent,
-                #     node,
-                #     self.MSG,
-                #     None,
-                #     None
-                # )
-                self.add_finding(node.parent, self.MSG, None)
+                self.add_finding(node.parent, node)
                 self.checked.append(node)
 
         self.call = False

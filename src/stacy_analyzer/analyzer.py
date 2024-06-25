@@ -3,8 +3,9 @@ import inspect
 import os
 import sys
 
-from stacks_analyzer.print_message import TerminalColors
-from stacks_analyzer.visitor import LinterRunner, Visitor
+from importlib.util import spec_from_file_location, module_from_spec
+from stacy_analyzer.print_message import TerminalColors
+from stacy_analyzer.visitor import LinterRunner, Visitor
 
 
 class Number(object):
@@ -34,15 +35,27 @@ class Analyzer:
     @staticmethod
     def find_detectors():
         found = []
-        for fname in os.listdir('.'):
-            if not fname.endswith('.py'):
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        detectors_dir = os.path.join(current_dir, 'detectors')
+
+        for fname in os.listdir(detectors_dir):
+            if not fname.endswith('.py') or fname == '__init__.py':
                 continue
-            mod = __import__(fname.replace('.py', ''), globals(), locals(), ['*'])
+
+            module_name = fname[:-3]
+            module_path = os.path.join(detectors_dir, fname)
+
+            spec = spec_from_file_location(module_name, module_path)
+            mod = module_from_spec(spec)
+            spec.loader.exec_module(mod)
+
             for attr in dir(mod):
-                if attr=='Visitor': continue
+                if attr == 'Visitor':
+                    continue
                 obj = getattr(mod, attr)
                 if inspect.isclass(obj) and issubclass(obj, Visitor):
                     found.append(obj)
+
         return {obj.__name__: obj for obj in found}
 
     def __init__(self):
@@ -62,8 +75,8 @@ class Analyzer:
 
         user_args = arg_parser.parse_args()
         if user_args.command == "lint":
-            filters = user_args.filter or list(self.DETECTOR_MAP.keys())
-            excludes = user_args.exclude or []
+            filters = list(self.DETECTOR_MAP.keys()) if user_args.filter is None else user_args.filter.split(',')
+            excludes = [] if user_args.exclude is None else user_args.exclude.split(',')
             detectors = self.get_detectors(filters, excludes)
             path = user_args.path
             if path.endswith(".clar"):
@@ -92,18 +105,14 @@ class Analyzer:
                     f" {color}|{end} {file.ljust(max_length + 1)}{color}|{end}")
             print(f" {color}└" + "─" * (max_length + 2) + f"┘{end}")
 
-    def get_detectors(self, filters: str, excludes=()):
-        all_detectors = list(self.DETECTOR_MAP.keys())      ## shouldn't be a list!!!
-        if len(filters) != len(all_detectors):  ## ???
-            filters = filters[0].split(',')
-        if excludes:
-            excludes = excludes[0].split(',')
-        filtered_names = []                                 ## again..
+    def get_detectors(self, filters: str, excludes: str):
+        all_detectors = set(self.DETECTOR_MAP.keys())
+        filtered_names = set()
         for fil in filters:
             if fil not in all_detectors:
                 print(f"{fil} is not a detector to filter.", file=sys.stderr)
             else:
-                filtered_names.append(fil)
+                filtered_names.add(fil)
 
         for exc in excludes:
             if exc not in all_detectors:
@@ -111,10 +120,6 @@ class Analyzer:
             if exc in filtered_names:
                 filtered_names.remove(exc)
 
-        # detectors = []
-        # for name in filtered_names:
-        #     detectors.append(self.DETECTOR_MAP[name])
-        # return detectors
         return [self.DETECTOR_MAP[name] for name in filtered_names]
 
     def lint_file(self, filename, lints: [Visitor]):

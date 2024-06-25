@@ -1,3 +1,4 @@
+import sys
 from dataclasses import dataclass
 from typing import Optional
 
@@ -7,7 +8,7 @@ from tree_sitter import Language, TreeCursor, Parser, Tree, Node
 __CLARITY__ = Language(tree_sitter_clarity.language())
 __TIMES__ = 3
 
-# from mypkg.print_message import pretty_print_warn
+from stacy_analyzer.print_message import pretty_print_warn
 
 
 @dataclass
@@ -31,25 +32,27 @@ class Finding:
 class Visitor:
     source: str | None
     MSG: str
+    HELP: str | None
+    FOOTNOTE: str | None
 
     def __init__(self):
         self.source = self.src_name = None
         self.findings = []
 
-    def add_source(self, source: str, src_name: str=None):
-        self.source = source
+    def add_source(self, src: str, src_name: str = None):
+        self.source = src
         self.src_name = src_name
 
     # noinspection PyShadowingBuiltins
     def visit_node(self, node: Node, round: int):
-        pass
+        sys.exit("visit_node not implemented")
 
     def get_contract_code_lines(self):
         return self.source.split('\n')
 
-    def add_finding(self, node: Node, help_msg=None, footnote=None):
-        # pretty_print_warn(self, node.parent, node, self.MSG, footnote)
-        # -----
+    def add_finding(self, node: Node, specific_node: Node):
+        pretty_print_warn(self, node, specific_node, self.MSG, self.HELP, self.FOOTNOTE)
+
         parent = node.parent
         line_number = parent.start_point.row + 1
         line_code = self.get_contract_code_lines()[line_number - 1]
@@ -57,7 +60,7 @@ class Visitor:
                             line_code.count('\t') + 1,
                             (node.start_point.column, node.end_point.column),
                             self.get_contract_code_lines()[line_number - 1])
-        finding = Finding(self.Name, self.src_name, self.MSG, help_msg, footnote, location)
+        finding = Finding(self.Name, self.src_name, self.MSG, self.HELP, self.FOOTNOTE, location)
         self.findings.append(finding)
         return finding
 
@@ -69,6 +72,7 @@ class Visitor:
     def Name(cls):
         return cls.__name__
 
+
 class NodeIterator:
     root_node: Node
     cursor: TreeCursor
@@ -77,7 +81,7 @@ class NodeIterator:
     def __init__(self, node: Node):
         self.root_node = node
         self.cursor = node.walk()
-        self.visited = set()  #[]
+        self.visited = []
 
         while self.cursor.goto_first_child():
             pass
@@ -86,23 +90,34 @@ class NodeIterator:
         while True:
             node = self.node()
 
-            if not node in self.visited:  # self.visited.__contains__(node):
+            if node not in self.visited:
                 if self.cursor.goto_first_child():
                     continue
-                self.visited.add(node)
+                self.visited.append(node)
                 return node
+
             if self.cursor.goto_next_sibling():
                 while self.cursor.goto_first_child():
                     pass
             else:
+
                 if not self.cursor.goto_parent():
                     return None
                 parent_node = self.cursor.node
-                self.visited.add(parent_node)
+                self.visited.append(parent_node)
                 return parent_node
 
     def node(self) -> Node | None:
         return self.cursor.node
+
+    def __iter__(self):
+        return self
+
+    def __next__(self) -> Node | None:
+        node = self.next()
+        if node is None:
+            raise StopIteration
+        return node
 
 
 class LinterRunner:
@@ -113,7 +128,7 @@ class LinterRunner:
     lints: []  # lo que vaya acá adentro REQUIERE tener el metodo visit_node (at least) # XXX Happens to be a visitor=)
     round_number: int
 
-    def __init__(self, source: str, src_name: str=None):
+    def __init__(self, source: str, src_name: str = None):
         self.src_name = src_name
         self.source = source
         parser = Parser(__CLARITY__)
@@ -131,10 +146,11 @@ class LinterRunner:
         self.lints.append(lint)
         return self
 
-    def add_lints(self, lints):
-        for lint in lints:
+    def add_lints(self, lint_classes: [Visitor]):
+        for lint_class in lint_classes:
+            lint = lint_class()
             lint.add_source(self.source, self.src_name)
-        self.lints.extend(lints)
+            self.lints.append(lint)
 
     def reset_cursor(self):
         self.iterator = NodeIterator(self.root_node)

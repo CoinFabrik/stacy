@@ -1,4 +1,4 @@
-PATH1 = stacks_analyzer/tree-sitter-clarity
+PATH1 = src/stacy_analyzer/tree-sitter-clarity
 PATH2 = .
 
 .PHONY: venv fish bash ps1 csh install

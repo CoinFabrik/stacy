@@ -3,5 +3,5 @@ Warning: Use of tx-sender inside an assert
    |
  5 |         (asserts! (is-eq tx-sender contract-owner) err-owner-only)
    |          ^^^^^^^^
-   Note: Consider using contract-caller
+   Note: Consider using contract-caller.
 
