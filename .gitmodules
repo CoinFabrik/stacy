@@ -1,3 +1,3 @@
-[submodule "stacy_analyzer/tree-sitter-clarity"]
-	path = stacy_analyzer/tree-sitter-clarity
+[submodule "src/stacy_analyzer/tree-sitter-clarity"]
+	path = src/stacy_analyzer/tree-sitter-clarity
 	url = https://github.com/xlittlerag/tree-sitter-clarity
