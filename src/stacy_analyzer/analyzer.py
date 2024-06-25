@@ -88,7 +88,8 @@ class Analyzer:
                             self.lint_file(os.path.join(root, file), detectors)
 
         if user_args.command == "detectors":
-            detectors = list(self.DETECTOR_MAP.keys())
+            convert_camel_case = lambda s: s[0] + ''.join(' ' + c if c.isupper() else c for c in s[1:])
+            detectors = list(map(convert_camel_case, self.DETECTOR_MAP.keys()))
 
             max_length = max(len(st) for st in detectors)
             s = max_length // 2 - 4
@@ -99,7 +100,7 @@ class Analyzer:
             else:
                 color = ""
                 end = ""
-            print(f" {color}┌" + "─" * (s - 1) + " Detectors " + "─" * s + f"┐{end}")
+            print(f" {color}┌" + "─" * s + " Detectors " + "─" * s + f"┐{end}")
             for file in detectors:
                 print(
                     f" {color}|{end} {file.ljust(max_length + 1)}{color}|{end}")
@@ -133,6 +134,8 @@ class Analyzer:
         runner: LinterRunner = LinterRunner(source, filename)
         runner.add_lints(lints)
         return runner.run()
+
+
 
 
 if __name__ == '__main__':

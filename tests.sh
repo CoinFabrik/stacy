@@ -24,7 +24,7 @@ for test_case in "$base_dir"/*; do
         if [[ "$example" == *.py ]]; then
             continue
         fi
-        
+
         if [[ -d "$example" ]]; then
             if [[ -t 1 ]]; then
                 echo "Testing detectors in" "$example"
