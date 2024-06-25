@@ -2,7 +2,7 @@ from tree_sitter import Node
 from stacy_analyzer.visitor import Visitor
 
 
-class UpdatedFunctionsDetector(Visitor):
+class UpdatedFunctions(Visitor):
     functions_updated = ["element-at", "index-of"]
 
     def __init__(self):

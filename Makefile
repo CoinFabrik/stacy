@@ -34,6 +34,8 @@ action: venv
 
 
 install: venv
+	@echo -e  "${GREEN}======== Removing previous install of Stacy ========${NC}"
+	./venv/bin/pip uninstall stacy-analyzer -y
 	@echo -e  "${GREEN}======== Cloning tree-sitter grammar for Clarity ========${NC}"
 	git submodule update --recursive
 	@echo -e "${GREEN}======== Installing tree-sitter grammar for Clarity ========${NC}"
@@ -59,6 +61,9 @@ test_ci: venv
 	./venv/bin/pip install $(PATH2)
 	@echo -e  "${GREEN}======== Testing detectors ========${NC}"
 	./tests.sh > $(GITHUB_WORKSPACE)/test.out
+
+unittest: venv install
+	cd tests/ && python3 -m unittest test_module1 && cd ..
 
 fish: venv
 	@echo -e "${BLUE}======== Using Fish shell ========${NC}"
