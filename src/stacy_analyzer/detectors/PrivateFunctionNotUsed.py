@@ -1,9 +1,9 @@
 from tree_sitter import Node
-from stacy_analyzer.visitor import Visitor, NodeIterator
+
+from stacy_analyzer.visitor import Visitor
 
 
 class PrivateFunctionNotUsed(Visitor):
-
     private_fns_names: [Node] = []
 
     def __init__(self):

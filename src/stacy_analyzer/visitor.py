@@ -21,6 +21,7 @@ class Location:
 
 @dataclass
 class Finding:
+    marked_nodes: (Node, Node)
     visitor: str
     source: str
     msg: str
@@ -60,9 +61,9 @@ class Visitor:
                             line_code.count('\t') + 1,
                             (node.start_point.column, node.end_point.column),
                             self.get_contract_code_lines()[line_number - 1])
-        finding = Finding(self.Name, self.src_name, self.MSG, self.HELP, self.FOOTNOTE, location)
+        finding = Finding((node, specific_node), self.Name, self.src_name, self.MSG, self.HELP, self.FOOTNOTE, location)
         self.findings.append(finding)
-        return finding
+        return sorted(self.findings, key=lambda f: f.location.lineno)
 
     def get_findings(self):
         return self.findings

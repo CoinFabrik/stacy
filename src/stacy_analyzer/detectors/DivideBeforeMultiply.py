@@ -1,4 +1,5 @@
 from tree_sitter import Node
+
 from stacy_analyzer.visitor import Visitor, NodeIterator
 
 
@@ -9,6 +10,7 @@ class DivideBeforeMultiply(Visitor):
         self.MSG = "Use of divide inside a multiplication. This could result in a precision loss."
         self.FOOTNOTE = "Try multiplication before division."
         self.HELP = None
+
     def visit_node(self, node: Node, i):
         if i > 1:
             return

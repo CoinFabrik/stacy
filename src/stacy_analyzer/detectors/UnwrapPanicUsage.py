@@ -1,5 +1,6 @@
 from tree_sitter import Node
-from stacy_analyzer.visitor import Visitor, NodeIterator
+
+from stacy_analyzer.visitor import Visitor
 
 
 class UnwrapPanicUsage(Visitor):
@@ -15,4 +16,3 @@ class UnwrapPanicUsage(Visitor):
             return
         if node.grammar_name == "unwrap-panic":
             self.add_finding(node.parent, node)
-

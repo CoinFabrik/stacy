@@ -1,4 +1,5 @@
 from tree_sitter import Node
+
 from stacy_analyzer.visitor import Visitor, NodeIterator
 
 
@@ -18,4 +19,3 @@ class TxSenderInAssert(Visitor):
                 if str(n.text, "utf8") == "tx-sender" and n.grammar_name == "global":
                     self.add_finding(node.parent, node)
                     break
-

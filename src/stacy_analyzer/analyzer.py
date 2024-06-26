@@ -2,10 +2,10 @@ import argparse
 import inspect
 import os
 import sys
-
 from importlib.util import spec_from_file_location, module_from_spec
+
 from stacy_analyzer.print_message import TerminalColors
-from stacy_analyzer.visitor import LinterRunner, Visitor
+from stacy_analyzer.visitor import LinterRunner, Visitor, Finding
 
 
 class Number(object):
@@ -133,9 +133,10 @@ class Analyzer:
 
         runner: LinterRunner = LinterRunner(source, filename)
         runner.add_lints(lints)
-        return runner.run()
 
+        findings: [Finding] = runner.run()
 
+        return findings
 
 
 if __name__ == '__main__':

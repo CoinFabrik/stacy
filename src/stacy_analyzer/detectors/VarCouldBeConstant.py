@@ -1,5 +1,6 @@
 from tree_sitter import Node
-from stacy_analyzer.visitor import Visitor, NodeIterator
+
+from stacy_analyzer.visitor import Visitor
 
 
 class VarCouldBeConstant(Visitor):
@@ -11,7 +12,7 @@ class VarCouldBeConstant(Visitor):
         self.MSG = "This can be a define-constant because it's never set"
         self.HELP = None
         self.FOOTNOTE = None
-        
+
     def visit_node(self, node: Node, i):
         if i == 1:
             if node.grammar_name == "define-data-var":

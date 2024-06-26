@@ -1,4 +1,5 @@
 from tree_sitter import Node
+
 from stacy_analyzer.visitor import Visitor, NodeIterator
 
 
