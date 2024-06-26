@@ -3,8 +3,6 @@ import sys
 
 from tree_sitter import Node
 
-from .visitor import Visitor
-
 tty = sys.stdout.isatty()
 
 
@@ -14,7 +12,7 @@ class TerminalColors:
     ENDC = '\033[0m' if tty else ''
 
 
-def pretty_print_warn(visitor: Visitor, parent: Node, specific_node: Node, msg: str, help_msg: str | None,
+def pretty_print_warn(visitor, parent: Node, specific_node: Node, msg: str, help_msg: str | None,
                       footnote: str | None):
     line_number = parent.start_point.row + 1
     num_size_spaces = " " * (int(math.log10(line_number)) + 2)

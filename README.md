@@ -6,58 +6,12 @@ Stacy is an open-source static analyzer for Clarity smart contracts. It is inten
 
 This tool will help developers write secure and more robust smart contracts.
 
-
 ## Install
 
-### HTTPS
-
 ```shell
-git clone --recurse-submodules -j8 https://github.com/CoinFabrik/stacy.git
-cd stacy
-make
+pip install git+https://github.com/xlittlerag/tree-sitter-clarity
+pip install stacy-analyzer
 ```
-
-### SSH
-
-```shell
-git clone --recurse-submodules -j8 git@github.com:CoinFabrik/stacy.git
-cd stacy
-make
-```
-
-If you already have an initialized python venv, use `make install`
-
-If you have a shell other than `bash`, use `make <shell>`
-
-## Run
-
-```shell
-stacy-analyzer lint <path/to/.clar>
-```
-
-You can run recursively over all `.clar` files in a directory. For this, run
-
-```shell
-stacy-analyzer lint <path/to/contract/folder>
-```
-
-## Tests
-
-To run tests, run
-```shell
-make test
-```
-
-## Common issues
-
-### `tree-sitter-clar` installation fails
-If the installation of `tree-sitter-clar` fails, go into `stacks_analyzer/tree-sitter-clarity` and run
-
-```shell
-tree-sitter generate && tree-sitter-build
-```
-
-Ensure that the submodule is loaded.
 
 ## Documentation
 

@@ -1,21 +1,77 @@
+import sys
+from dataclasses import dataclass
+from typing import Optional
+
 import tree_sitter_clarity
 from tree_sitter import Language, TreeCursor, Parser, Tree, Node
 
 __CLARITY__ = Language(tree_sitter_clarity.language())
 __TIMES__ = 3
 
+from stacy_analyzer.print_message import pretty_print_warn
+
+
+@dataclass
+class Location:
+    lineno: int
+    start_tabs: int
+    span: tuple[int, int]
+    line_code: str
+
+
+@dataclass
+class Finding:
+    marked_nodes: (Node, Node)
+    visitor: str
+    source: str
+    msg: str
+    help_msg: Optional[str]
+    footnote: Optional[str]
+    location: Optional[Location]
+
 
 class Visitor:
     source: str | None
+    MSG: str
+    HELP: str | None
+    FOOTNOTE: str | None
 
     def __init__(self):
-        self.source = None
+        self.source = self.src_name = None
+        self.findings = []
 
-    def add_source(self, source: str):
-        self.source = source
+    def add_source(self, src: str, src_name: str = None):
+        self.source = src
+        self.src_name = src_name
 
-    def visit_node(self, node: Node, i: int):
-        pass
+    # noinspection PyShadowingBuiltins
+    def visit_node(self, node: Node, round: int):
+        sys.exit("visit_node not implemented")
+
+    def get_contract_code_lines(self):
+        return self.source.split('\n')
+
+    def add_finding(self, node: Node, specific_node: Node):
+        pretty_print_warn(self, node, specific_node, self.MSG, self.HELP, self.FOOTNOTE)
+
+        parent = node.parent
+        line_number = parent.start_point.row + 1
+        line_code = self.get_contract_code_lines()[line_number - 1]
+        location = Location(parent.start_point.row + 1,
+                            line_code.count('\t') + 1,
+                            (node.start_point.column, node.end_point.column),
+                            self.get_contract_code_lines()[line_number - 1])
+        finding = Finding((node, specific_node), self.Name, self.src_name, self.MSG, self.HELP, self.FOOTNOTE, location)
+        self.findings.append(finding)
+        return sorted(self.findings, key=lambda f: f.location.lineno)
+
+    def get_findings(self):
+        return self.findings
+
+    @classmethod
+    @property
+    def Name(cls):
+        return cls.__name__
 
 
 class NodeIterator:
@@ -70,10 +126,11 @@ class LinterRunner:
     tree: Tree
     root_node: Node
     iterator: NodeIterator
-    lints: []  # lo que vaya acá adentro REQUIERE tener el metodo visit_node (at least)
+    lints: []  # lo que vaya acá adentro REQUIERE tener el metodo visit_node (at least) # XXX Happens to be a visitor=)
     round_number: int
 
-    def __init__(self, source: str):
+    def __init__(self, source: str, src_name: str = None):
+        self.src_name = src_name
         self.source = source
         parser = Parser(__CLARITY__)
         self.tree = parser.parse(bytes(self.source, "utf8"))
@@ -90,10 +147,11 @@ class LinterRunner:
         self.lints.append(lint)
         return self
 
-    def add_lints(self, lints):
-        for lint in lints:
-            lint.add_source(self.source)
-        self.lints.extend(lints)
+    def add_lints(self, lint_classes: [Visitor]):
+        for lint_class in lint_classes:
+            lint = lint_class()
+            lint.add_source(self.source, self.src_name)
+            self.lints.append(lint)
 
     def reset_cursor(self):
         self.iterator = NodeIterator(self.root_node)
@@ -107,3 +165,6 @@ class LinterRunner:
                     break
                 self.run_lints(v)
             self.reset_cursor()
+
+        return [finding for lint in self.lints
+                for finding in lint.get_findings()]

@@ -21,10 +21,16 @@ base_dir="tests"
 
 for test_case in "$base_dir"/*; do
     for example in "$test_case"/*; do
-        if [[ -t 1 ]]; then
-          echo "Testing detectors in" "$example"
+        if [[ "$example" == *.py ]]; then
+            continue
         fi
-        process_example "$example"
+
+        if [[ -d "$example" ]]; then
+            if [[ -t 1 ]]; then
+                echo "Testing detectors in" "$example"
+            fi
+            process_example "$example"
+        fi
     done
 done
 
