@@ -28,7 +28,6 @@ if __name__=="__main__":
             "Environment :: Console",
             "License :: OSI Approved :: MIT License",
             "Natural Language :: English",
-            "Programming Language :: Clarity",
             "Topic :: Software Development",
             "Topic :: Utilities"
         ],
