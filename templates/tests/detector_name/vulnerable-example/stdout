@@ -1,0 +1,9 @@
+Paste the output of running your detector.
+
+====== Linting tests/detector_name/vulnerable-example/contract.clar... ======
+Warning: Use of block-height inside a assert.
+   |
+ 6 |         (asserts! (> (get expiry nft-asset) block-height) err-expiry-in-past)
+   |          ^^^^^^^^
+   Note: Consider using burn-block-height.
+
