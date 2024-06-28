@@ -20,7 +20,7 @@ To contribute a new detector:
 
 To contribute a new test case:
 
-1. Create a new folder in the [`tests`](https://github.com/CoinFabrik/stacy/tree/main/tests) directory. ** Remember to follow the underscore naming convention for the folder name**.
+1. Create a new folder in the [`tests`](https://github.com/CoinFabrik/stacy/tree/main/tests) directory. **Remember to follow the underscore naming convention for the folder name**.
 
 2. Within this folder, create two directories: `vulnerable-example` and `remediated-example`. Fill each with the relevant files for their respective test cases. 
 
