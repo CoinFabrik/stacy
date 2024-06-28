@@ -88,8 +88,10 @@ class Analyzer:
                             self.lint_file(os.path.join(root, file), detectors)
 
         if user_args.command == "detectors":
-            convert_camel_case = lambda s: s[0] + ''.join(' ' + c if c.isupper() else c for c in s[1:])
-            detectors = list(map(convert_camel_case, self.DETECTOR_MAP.keys()))
+
+            detectors = list(
+                map(lambda ls: ls[0] + ''.join(' ' + c if c.isupper() else c for c in ls[1:]),
+                    self.DETECTOR_MAP.keys()))
 
             max_length = max(len(st) for st in detectors)
             s = max_length // 2 - 4

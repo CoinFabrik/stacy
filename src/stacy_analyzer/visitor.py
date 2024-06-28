@@ -2,10 +2,10 @@ import sys
 from dataclasses import dataclass
 from typing import Optional
 
-import tree_sitter_clarity
+import ts_clarity
 from tree_sitter import Language, TreeCursor, Parser, Tree, Node
 
-__CLARITY__ = Language(tree_sitter_clarity.language())
+__CLARITY__ = Language(ts_clarity.language())
 __TIMES__ = 3
 
 from stacy_analyzer.print_message import pretty_print_warn
@@ -126,7 +126,7 @@ class LinterRunner:
     tree: Tree
     root_node: Node
     iterator: NodeIterator
-    lints: []  # lo que vaya acá adentro REQUIERE tener el metodo visit_node (at least) # XXX Happens to be a visitor=)
+    lints: []
     round_number: int
 
     def __init__(self, source: str, src_name: str = None):

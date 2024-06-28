@@ -3,7 +3,7 @@ import setuptools
 with open('README.md', 'r', encoding='utf-8') as fh:
     long_description = fh.read()
 
-if __name__=="__main__":
+if __name__ == "__main__":
     setuptools.setup(
         name='stacy-analyzer',
         author='CoinFabrik',
@@ -32,9 +32,9 @@ if __name__=="__main__":
             "Topic :: Utilities"
         ],
         python_requires='>=3.6',
-        install_requires=['tree-sitter', 'tree-sitter-clarity'],
+        install_requires=['tree-sitter', 'ts-clarity'],
         entry_points={
-            'console_scripts': [  # This can provide executable scripts
+            'console_scripts': [
                 'stacy-analyzer=stacy_analyzer:main',
             ],
         },
