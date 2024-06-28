@@ -26,6 +26,6 @@ class VarCouldBeConstant(Visitor):
                         self.data_vars.remove(n)
 
         if i == 3:
-            for n in self.data_vars:
-                self.add_finding(n, n)
+            for node in self.data_vars:
+                self.add_finding(node, node)
             self.data_vars = []
