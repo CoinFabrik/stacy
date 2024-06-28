@@ -16,6 +16,7 @@ pip install stacy-analyzer
 ## Documentation
 
 - [Vulnerabilities](https://github.com/CoinFabrik/stacy/tree/main/docs/vulnerabilities)
+- [Guidelines](https://github.com/CoinFabrik/stacy/tree/main/docs/guidelines)
 
 ## Detectors
 
