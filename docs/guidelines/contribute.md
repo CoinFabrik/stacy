@@ -24,4 +24,4 @@ To contribute a new test case:
 
 2. Within this folder, create two directories: `vulnerable-example` and `remediated-example`. Fill each with the relevant files for their respective test cases. 
 
-For guidance, refer to the `detectir_name` template in [`templates/test-case`](https://github.com/CoinFabrik/stacy/tree/main/templates/tests).
+For guidance, refer to the `detector_name` template in [`templates/test-case`](https://github.com/CoinFabrik/stacy/tree/main/templates/tests).
