@@ -19,3 +19,18 @@
 (define-public (withdraw (argument_not_used uint))
 	(ok 0)
 )
+
+(define-public (withdraw (argument_used_inside_a_begin uint))
+	(begin 
+		(ok 0)
+		(ok 1)
+		(ok argument_used_inside_a_begin)
+	)	
+)
+
+(define-read-only (withdraw (argument_not_used_inside_a_begin uint))
+	(begin 
+		(ok 0)
+		(ok 1)
+	)	
+)
