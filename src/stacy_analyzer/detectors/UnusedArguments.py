@@ -2,8 +2,8 @@ from tree_sitter import Node
 from stacy_analyzer.visitor import Visitor
 
 """
-IMPORTANT: FALSE POSITIVES FOR ARGUMENTS INSIDE A (LET ) BODY
-
+IMPORTANT: IT HAS NOT BEEN TESTED YET IF THERE ARE FALSE POSITIVES INSIDE A PASSED ARGUMENT NOT USED INSIDE
+A (LET ) BODY
 """
 
 
@@ -21,6 +21,10 @@ class UnusedArguments(Visitor):
         if i == 1 and node.grammar_name in ["private_function", "read_only_function", "public_function"]:
             arguments = {}
             for child in node.children:
+
+                if child.grammar_name == "let_expression":
+                    continue
+
                 if child.grammar_name == "function_signature":
                     #save all arguments that are passed to the function
                     
@@ -28,15 +32,14 @@ class UnusedArguments(Visitor):
                         if grandchild.grammar_name == "function_parameter":
                             argument = grandchild.child(1).text.decode("utf-8")
                             arguments[argument] = (0, grandchild) 
-
-                    
+                
                 if child.grammar_name == "basic_native_form":
-
                     for grandchild in child.children:
                         for key in arguments:
                             update = arguments[key] #update = (count, node)
                             count = update[0] + grandchild.text.decode("utf-8").count(key)
                             arguments[key] = (count, update[1])
+            
             
             for k,v in arguments.items():
 
