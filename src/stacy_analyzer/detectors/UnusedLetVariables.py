@@ -28,11 +28,11 @@ class UnusedLetVariable(Visitor):
 
 
             for (k,v) in self.arguments.items():
-                self.MSG = ""
+                self.MSG = f"'{k}' variable created but not used."
                 self.HELP = ""
-                self.FOOTNOTE = ""
+                self.FOOTNOTE = f"Consider removing '{k}' from let function since its not used."
                 self.add_finding(v, v)
-                
+
 
 
                     
