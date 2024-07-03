@@ -2,52 +2,66 @@
 ## Description
 - Vulnerability Category: `Best practices`
 - Severity: `Enhancement`
-- Detectors: [`unused-let-variables`](https://github.com/CoinFabrik/stacy/blob/main/stacks_analyzer/detectors/UpdatedFunctionsDetector.py)
-- Test Cases: [`unused-let-variables`](https://github.com/CoinFabrik/stacy/tree/main/tests/updated_functions)
+- Detectors: [`unused-let-variables`]()
+- Test Cases: [`unused-let-variables`]()
 
+Do not declare variables inside a `let` function if you will not used it. This will optimize the contract's code and reduce gas.
 
 ## Exploit Scenario
 
 ```clarity
 
-(define-constant places (list 1 2 3 4 5))
-
-(define-read-only (get-element (sequence (list 5 uint)) (index uint))
-  (element-at sequence index)
+(define-public  (endPlay) 
+    (let (
+        (first (get j (unwrap-panic (map-get? sorted {o: u0}))))
+        (second (get j (unwrap-panic (map-get? sorted {o: u1}))))
+		    (not-used u8)
+		)
+        (begin 
+            (asserts!  (> (var-get revelations ) u1) (err "It can not be reveal yet!")) 
+            
+            (if (is-eq (var-get booleans_played) 0) 
+                (begin (map-set to_pay  first  u0 ) 
+                    (map-set to_pay  second (var-get pozo) ) )
+                (begin (map-set to_pay  second u0) 
+                    (map-set to_pay  first (var-get pozo) ) )
+            )
+        ) 
+        (ok true)
+    )
 )
-
-(define-read-only (get-index (elem uint))
-  (index-of places elem)
-)
-
 ```
 
 
-The vulnerable code example can be found [here](https://github.com/CoinFabrik/stacy/blob/main/tests/updated_functions/vulnerable-example/undated_functions.clar).
+The vulnerable code example can be found [here]().
 
 ## Remediation
 
-Use the latest version of Clarity and update the functions to the new signature.
 
 ```clarity
 
-(define-constant places (list 1 2 3 4 5))
-
-(define-read-only (get-element (sequence (list 5 uint)) (index uint))
-  (element-at? sequence index)
+(define-public  (endPlay) 
+    (let (
+        (first (get j (unwrap-panic (map-get? sorted {o: u0}))))
+        (second (get j (unwrap-panic (map-get? sorted {o: u1}))))
+		)
+        (begin 
+            (asserts!  (> (var-get revelations ) u1) (err "It can not be reveal yet!")) 
+            
+            (if (is-eq (var-get booleans_played) 0) 
+                (begin (map-set to_pay  first  u0 ) 
+                    (map-set to_pay  second (var-get pozo) ) )
+                (begin (map-set to_pay  second u0) 
+                    (map-set to_pay  first (var-get pozo) ) )
+            )
+        ) 
+        (ok true)
+    )
 )
 
-(define-read-only (get-index (elem uint))
-  (index-of? places elem)
-)
 ```
 
-The remediated code example can be found [here](https://github.com/CoinFabrik/stacy/blob/main/tests/updated_functions/remediated-example/undated_functions.clar).
+The remediated code example can be found [here]().
 
 
 
-## References
-- [index-of](https://docs.stacks.co/clarity/functions#index-of)
-- [index-of?](https://docs.stacks.co/clarity/functions#index-of?)
-- [element-at](https://docs.stacks.co/clarity/functions#element-at)
-- [element-at?](https://docs.stacks.co/clarity/functions#element-at?)
