@@ -2,7 +2,7 @@ from tree_sitter import Node
 from stacy_analyzer.visitor import Visitor, NodeIterator
 
 
-class UnusedLetVariable(Visitor):
+class UnusedLetVariables(Visitor):
     arguments = {}
     
     def __init__(self):
@@ -26,7 +26,7 @@ class UnusedLetVariable(Visitor):
                 if let_node.text.decode("utf-8") in self.arguments:
                     del self.arguments[let_node.text.decode("utf-8")]
 
-            print("hola")
+            
             for (k,v) in self.arguments.items():
                 self.MSG = f"'{k}' variable created but not used."
                 self.HELP = ""
