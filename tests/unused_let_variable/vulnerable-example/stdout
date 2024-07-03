@@ -1,16 +1,7 @@
-====== Linting tests/var_could_be_constant/vulnerable-example/var_could_be_constant.clar... ======
-Warning: This can be a define-constant because it's never set
-   |
- 3 | (define-data-var contract-owner tx-sender)
-   |                  ^^^^^^^^^^^^^^
-
-Warning: This can be a define-constant because it's never set
-   |
- 4 | (define-data-var err-owner-only uint u100)
-   |                  ^^^^^^^^^^^^^^
-
-Warning: This can be a define-constant because it's never set
-   |
- 5 | (define-data-var err-not-token-owner uint u101)
-   |                  ^^^^^^^^^^^^^^^^^^^
-
+====== Linting tests/unused_let_variable/vulnerable-example/unused_let_variable.clar... ======
+Warning: 'var-not-used' variable created but not used.
+    |
+ 22 |             (var-not-used 0)
+    |             ^^^^^^^^^^^^^^^^
+    |             
+    Note: Consider removing 'var-not-used' from let function since its not used.

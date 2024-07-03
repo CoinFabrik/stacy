@@ -7,7 +7,8 @@
 
 (define-non-fungible-token stacksies uint)
 
-(define-public (transfer (token-id uint) (sender principal) (recipient principal))
+;; The argument `not_used_outside_let` is catched by UnusedArgument detector
+(define-public (transfer (token-id uint) (sender principal) (recipient principal) (not_used_outside_let uint))
 	(begin
 		(asserts! (is-eq contract-caller sender) err-not-token-owner)
 		(nft-transfer? stacksies token-id sender recipient)
