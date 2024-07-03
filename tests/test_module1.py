@@ -4,7 +4,7 @@ import unittest
 
 from stacy_analyzer.analyzer import Analyzer
 
-__DETECTOR_QUANTITY__ = 9
+__DETECTOR_QUANTITY__ = 10
 
 
 class TestFind1Detector(unittest.TestCase):
