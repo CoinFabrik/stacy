@@ -2,8 +2,8 @@
 ## Description
 - Vulnerability Category: `Best practices`
 - Severity: `Enhancement`
-- Detectors: [`unused-arguments`](https://github.com/CoinFabrik/stacy/blob/main/stacks_analyzer/detectors/UnusedArguments.py)
-- Test Cases: [`unused-arguments`](https://github.com/CoinFabrik/stacy/tree/main/tests/unused_arguments)
+- Detectors: [`unused-arguments`]()
+- Test Cases: [`unused-arguments`]()
 
 If you know that a parameter in a function will not be used, remove it. This will optimize the contract's code and reduce gas.
 
@@ -18,7 +18,7 @@ If you know that a parameter in a function will not be used, remove it. This wil
 ```
 
 
-The vulnerable code example can be found [here](https://github.com/CoinFabrik/stacy/blob/main/tests/unused_arguments/vulnerable-example/unused_arguments.clar).
+The vulnerable code example can be found [here]().
 
 ## Remediation
 
@@ -31,4 +31,4 @@ The vulnerable code example can be found [here](https://github.com/CoinFabrik/st
 
 ```
 
-The remediated code example can be found [here](https://github.com/CoinFabrik/stacy/blob/main/tests/unused_arguments/remediated-example/unused_arguments.clar).
+The remediated code example can be found [here]().
