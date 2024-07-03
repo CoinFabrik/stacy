@@ -1,19 +1,19 @@
-====== Linting tests/unused_arguments/vulnerable-example/unused_arguments.clar... ======
-Warning: 'offset' argument passed but not used.
+====== Linting /tests/unused_arguments/vulnerable-example/unused_arguments.clar... ======
+Warning: 'not-used-private' argument passed but not used.
     |
- 11 | (define-private (tally (member principal) (accumulator uint) (offset int))
-    |                                                              ^^^^^^^^^^^^
-    Note: Consider removing 'offset' since its not used inside the function.
+ 27 | (define-read-only (make_hash (bet bool) (number uint) (not-used-private int))
+    |                                                       ^^^^^^^^^^^^^^^^^^^^^^
+    Note: Consider removing 'not-used-private' since its not used inside the function.
 
-Warning: 'a-member' argument passed but not used.
+Warning: 'not-used-public' argument passed but not used.
     |
- 15 | (define-read-only (tally-votes (a-member principal))
-    |                                ^^^^^^^^^^^^^^^^^^^^
-    Note: Consider removing 'a-member' since its not used inside the function.
+ 31 | (define-public (show_my_play (bool_in bool) (num uint) (not-used-public uint) )
+    |                                                        ^^^^^^^^^^^^^^^^^^^^^^
+    Note: Consider removing 'not-used-public' since its not used inside the function.
 
-Warning: 'argument_not_used' argument passed but not used.
+Warning: 'not-used-private' argument passed but not used.
     |
- 19 | (define-public (withdraw (argument_not_used uint))
-    |                          ^^^^^^^^^^^^^^^^^^^^^^^^
-    Note: Consider removing 'argument_not_used' since its not used inside the function.
-    
+ 43 | (define-private (getJugador (indice uint) (not-used-private uint)) (get j (unwrap-panic (map-get? sorted {o:indice}))))
+    |                                           ^^^^^^^^^^^^^^^^^^^^^^^
+    Note: Consider removing 'not-used-private' since its not used inside the function.
+
