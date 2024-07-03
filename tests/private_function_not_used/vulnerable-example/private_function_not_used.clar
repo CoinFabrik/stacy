@@ -11,7 +11,7 @@
 )
 
 (define-private (get-token-uri (token-id uint))
-	(ok none)
+	(ok token-id)
 )
 
 (define-private (get-owner (token-id uint))

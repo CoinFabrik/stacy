@@ -1,7 +1,0 @@
-====== Linting tests/unused_let_variable/vulnerable-example/unused_let_variable.clar... ======
-Warning: 'var-not-used' variable created but not used.
-    |
- 22 |             (var-not-used 0)
-    |             ^^^^^^^^^^^^^^^^
-    |             
-    Note: Consider removing 'var-not-used' from let function since its not used.

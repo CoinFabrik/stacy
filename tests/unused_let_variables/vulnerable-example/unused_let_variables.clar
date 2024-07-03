@@ -41,7 +41,7 @@
     )
 )
 
-(define-private (getJugador (indice uint) (not-used-private uint)) (get j (unwrap-panic (map-get? sorted {o:indice}))))
+(define-public (getJugador (indice uint) (not-used-private uint)) (get j (unwrap-panic (map-get? sorted {o:indice}))))
 
 
 (define-public  (endPlay) 
