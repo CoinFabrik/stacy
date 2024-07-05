@@ -7,5 +7,6 @@
 )
 
 (define-public (mint (recipient principal))
-	(ok 1)
+    ;; implementation
+	(ok recipient)
 )
