@@ -16,6 +16,8 @@ To contribute a new detector:
 
 2. Add your modified DetectorName.py file inside the [`detectors`](https://github.com/CoinFabrik/stacy/tree/main/src/stacy_analyzer/detectors) directory.
 
+3. To check if your detector is working properly, run the following command `pip install . && stacy-analyzer lint path_to_contract_test.clar ` .
+
 ### Test Cases
 
 To contribute a new test case:

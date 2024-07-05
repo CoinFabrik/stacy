@@ -2,7 +2,7 @@
 ## Description
 - Vulnerability Category: `Validations and error handling`
 - Severity: `Minor`
-- Detectors: [`unwrap-panic-usage`](https://github.com/CoinFabrik/stacy/blob/main/stacks_analyzer/detectors/UnwrapPanicUsage.py)
+- Detectors: [`unwrap-panic-usage`](https://github.com/CoinFabrik/stacy/blob/main/src/stacy_analyzer/detectors/UnwrapPanicUsage.py)
 - Test Cases: [`unwrap-panic-usage`](https://github.com/CoinFabrik/stacy/tree/main/tests/unwrap_panic_usage)
 
 The `unwrap-panic` function attempts to 'unpack' its argument. If it fails, it throws a runtime error, which aborts the execution of the current transaction.
