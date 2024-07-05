@@ -24,11 +24,11 @@
             (err "There are already two players!"))))
 )
 
-(define-read-only (make_hash (bet bool) (number uint) (not-used-private int))
+(define-read-only (make_hash (bet bool) (number uint))
     (sha256 (concat (unwrap! (to-consensus-buff? bet) "err") (unwrap! (to-consensus-buff? number) "err")))
 )
 
-(define-public (show_my_play (bool_in bool) (num uint) (not-used-public uint) )
+(define-public (show_my_play (bool_in bool) (num uint))
     (begin 
         (asserts! (not (is-none (map-get? play {j:contract-caller} ))) (err  "You are not a player" ))
         (asserts! (is-eq (make_hash bool_in num) (get hash (unwrap! (map-get? play {j:contract-caller} ) "err")))
@@ -40,7 +40,7 @@
     )
 )
 
-(define-public (getJugador (indice uint) (not-used-private uint)) (get j (unwrap! (map-get? sorted {o:indice}) "err" )))
+(define-public (getJugador (indice uint)) (get j (unwrap! (map-get? sorted {o:indice}) "err" )))
 
 
 (define-public  (endPlay) 
@@ -49,7 +49,7 @@
         (second (get j (unwrap! (map-get? sorted {o: u1}) "err" )))
 		(not-used u8)
 		)
-		 
+
         (begin 
             (asserts!  (> (var-get revelations ) u1) (err "It can not be reveal yet!")) 
             

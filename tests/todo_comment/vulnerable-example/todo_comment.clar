@@ -9,7 +9,7 @@
 
 (define-public (mint (recipient principal))
 	;; TODO: implement this function
-	(ok 1)
+	(ok recipient)
 )
 
 ;; ToDo: Implement the rest of the contract
