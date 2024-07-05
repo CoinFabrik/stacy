@@ -1,0 +1,19 @@
+====== Linting /tests/unused_arguments/vulnerable-example/unused_arguments.clar... ======
+Warning: 'not-used-private' argument passed but not used.
+    |
+ 27 | (define-read-only (make_hash (bet bool) (number uint) (not-used-private int))
+    |                                                       ^^^^^^^^^^^^^^^^^^^^^^
+    Note: Consider removing 'not-used-private' since its not used inside the function.
+
+Warning: 'not-used-public' argument passed but not used.
+    |
+ 31 | (define-public (show_my_play (bool_in bool) (num uint) (not-used-public uint) )
+    |                                                        ^^^^^^^^^^^^^^^^^^^^^^
+    Note: Consider removing 'not-used-public' since its not used inside the function.
+
+Warning: 'not-used-private' argument passed but not used.
+    |
+ 43 | (define-private (getJugador (indice uint) (not-used-private uint)) (get j (unwrap-panic (map-get? sorted {o:indice}))))
+    |                                           ^^^^^^^^^^^^^^^^^^^^^^^
+    Note: Consider removing 'not-used-private' since its not used inside the function.
+

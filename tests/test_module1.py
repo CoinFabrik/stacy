@@ -4,13 +4,15 @@ import unittest
 
 from stacy_analyzer.analyzer import Analyzer
 
-__DETECTOR_QUANTITY__ = 9
+__DETECTOR_QUANTITY__ = 11
 
 
 class TestFind1Detector(unittest.TestCase):
     def test_add(self):
         a = Analyzer()
         self.assertTrue(len(a.DETECTOR_MAP) == __DETECTOR_QUANTITY__, f"{a.DETECTOR_MAP}")
+        print("Detector count is OK")
+
 
     def test_detector_file(self):
         p = '.'
@@ -22,7 +24,7 @@ class TestFind1Detector(unittest.TestCase):
                 a = Analyzer()
                 for detector in a.DETECTOR_MAP.values():
                     a = Analyzer()
-                    ret = a.lint_file(filename, [detector])
+                    ret = a.lint_file(filename, [detector], False)
                     is_vulnerable_path = "vulnerable" in filename
                     is_correct_detector = detector.Name.lower() in filename.replace('_', '')
 
@@ -35,7 +37,7 @@ class TestFind1Detector(unittest.TestCase):
                         f"Expected {expected} lint(s), but found {actual}. \n"
                         f"Lints: {ret}\n"
                     )
-
+        print("All detectors tests passed")
 
 
     def test_profile_time(self):
@@ -45,9 +47,9 @@ class TestFind1Detector(unittest.TestCase):
         start = time.time()
         for _ in range(1000):
             a = Analyzer()
-            a.lint_file(filename, [detectorKlass for detectorKlass in lints])
+            a.lint_file(filename, [detectorKlass for detectorKlass in lints], False)
         end = time.time()
-        print(f'took: {end - start:f}s')
+        print(f'Running 1000 times `tx_sender` detector took: {end - start:f}s')
 
 
 if __name__ == '__main__':

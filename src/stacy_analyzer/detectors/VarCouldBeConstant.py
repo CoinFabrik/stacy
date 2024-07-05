@@ -6,8 +6,8 @@ from stacy_analyzer.visitor import Visitor
 class VarCouldBeConstant(Visitor):
     data_vars: []
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, print_output: bool = True):
+        super().__init__(print_output)
         self.data_vars = []
         self.MSG = "This can be a define-constant because it's never set"
         self.HELP = None
