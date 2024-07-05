@@ -6,8 +6,8 @@ from stacy_analyzer.visitor import Visitor
 class UpdatedFunctions(Visitor):
     functions_updated = ["element-at", "index-of"]
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, print_output: bool = True):
+        super().__init__(print_output)
         self.HELP = None
 
     def visit_node(self, node: Node, i):

@@ -6,8 +6,8 @@ from stacy_analyzer.visitor import Visitor
 class PrivateFunctionNotUsed(Visitor):
     private_fns_names: [Node] = []
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, print_output: bool = True):
+        super().__init__(print_output)
         self.private_fns_names: [Node] = []
         self.MSG = "This private function is not used."
         self.FOOTNOTE = "Consider removing it."

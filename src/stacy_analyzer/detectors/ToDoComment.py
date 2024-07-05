@@ -5,8 +5,8 @@ from stacy_analyzer.visitor import Visitor
 
 class ToDoComment(Visitor):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, print_output: bool = True):
+        super().__init__(print_output)
         self.MSG = "Remove TODO: comment before deploying contract"
         self.HELP = None
         self.FOOTNOTE = None
