@@ -5,7 +5,6 @@
 (define-data-var players_counter  uint u0)
 (define-data-var  booleans_played int 0)
 (define-data-var revelations uint u0)
-(define-data-var already_payed_them uint u0)
 (define-data-var pozo uint u0)
 
 ;; diclaimer: All the `not-used-*` arguments are catched by UnusedArguments detector
@@ -26,13 +25,13 @@
 )
 
 (define-read-only (make_hash (bet bool) (number uint) (not-used-private int))
-    (sha256 (concat (unwrap-panic (to-consensus-buff? bet)) (unwrap-panic (to-consensus-buff? number) ) ))
+    (sha256 (concat (unwrap! (to-consensus-buff? bet) "err") (unwrap! (to-consensus-buff? number) "err")))
 )
 
 (define-public (show_my_play (bool_in bool) (num uint) (not-used-public uint) )
     (begin 
-        (asserts! (not (is-none (map-get? play {j:tx-sender} ))) (err  "You are not a player" ))
-        (asserts! (is-eq (make_hash bool_in num) (get hash (unwrap-panic (map-get? play {j:tx-sender} )))   )
+        (asserts! (not (is-none (map-get? play {j:contract-caller} ))) (err  "You are not a player" ))
+        (asserts! (is-eq (make_hash bool_in num) (get hash (unwrap! (map-get? play {j:contract-caller} ) "err")))
                   (err "Do not cheat, try again") )
         (var-set revelations (+ (var-get revelations ) u1))
         (if (is-eq bool_in true) (var-set  booleans_played (+ (var-get booleans_played) 1)) 
@@ -41,13 +40,13 @@
     )
 )
 
-(define-public (getJugador (indice uint) (not-used-private uint)) (get j (unwrap-panic (map-get? sorted {o:indice}))))
+(define-public (getJugador (indice uint) (not-used-private uint)) (get j (unwrap! (map-get? sorted {o:indice}) "err" )))
 
 
 (define-public  (endPlay) 
     (let (
-        (first (get j (unwrap-panic (map-get? sorted {o: u0}))))
-        (second (get j (unwrap-panic (map-get? sorted {o: u1}))))
+        (first (get j (unwrap! (map-get? sorted {o: u0}) "err" )))
+        (second (get j (unwrap! (map-get? sorted {o: u1}) "err" )))
 		(not-used u8)
 		)
 		 
