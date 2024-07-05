@@ -20,7 +20,6 @@ action: venv
 	git submodule update --recursive
 	@echo -e "${GREEN}======== Installing tree-sitter ========${NC}"
 	cd $(PATH1)
-	git checkout 6eb27feb606856e94bc0948b62c6ae2cb05a9700
 	npm install tree-sitter-cli
 	@echo -e "${GREEN}======== Installing tree-sitter grammar for Clarity ========${NC}"
 	cd $(PATH1) && npx tree-sitter generate
@@ -53,6 +52,7 @@ test_ci: venv
 	git submodule update --init --remote --recursive
 	@echo -e "${GREEN}======== Installing tree-sitter ========${NC}"
 	cd $(PATH1)
+	git checkout 6eb27feb606856e94bc0948b62c6ae2cb05a9700
 	npm install tree-sitter-cli
 	@echo -e "${GREEN}======== Installing tree-sitter grammar for Clarity ========${NC}"
 	cd $(PATH1) && npx tree-sitter generate
