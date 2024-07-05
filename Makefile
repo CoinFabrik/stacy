@@ -13,7 +13,7 @@ NC = \033[0m
 default: bash
 
 venv:
-	python3 -m venv venv
+	python3 -m venv venv > /dev/null 2>&1
 
 action: venv
 	@echo -e  "${GREEN}======== Cloning tree-sitter grammar for Clarity ========${NC}"
@@ -55,12 +55,11 @@ test_ci: venv
 	@echo -e "${GREEN}======== Installing Stacy for Clarity ========${NC}"
 	./venv/bin/pip install $(PATH2)
 	@echo -e  "${GREEN}======== Testing detectors ========${NC}"
-	cd tests/ && ../venv/bin/python3 -m unittest test_module1 > $(GITHUB_WORKSPACE)/test.out && cd ..
+	cd tests/ && ../venv/bin/python3 -m unittest test_module1 > $(GITHUB_WORKSPACE)/test.out 2>&1 && cd ..
 
 .SILENT:unittest
 
-unittest:
-	python3 -m venv venv > /dev/null 2>&1
+unittest: venv
 	./venv/bin/pip uninstall stacy-analyzer -y > /dev/null 2>&1
 	git submodule update --recursive > /dev/null 2>&1
 	./venv/bin/pip install $(PATH1) > /dev/null 2>&1

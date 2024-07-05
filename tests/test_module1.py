@@ -11,6 +11,8 @@ class TestFind1Detector(unittest.TestCase):
     def test_add(self):
         a = Analyzer()
         self.assertTrue(len(a.DETECTOR_MAP) == __DETECTOR_QUANTITY__, f"{a.DETECTOR_MAP}")
+        print("Detector count is OK")
+
 
     def test_detector_file(self):
         p = '.'
@@ -35,7 +37,7 @@ class TestFind1Detector(unittest.TestCase):
                         f"Expected {expected} lint(s), but found {actual}. \n"
                         f"Lints: {ret}\n"
                     )
-
+        print("All detectors tests passed")
 
 
     def test_profile_time(self):
