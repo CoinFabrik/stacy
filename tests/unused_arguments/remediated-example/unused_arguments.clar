@@ -17,7 +17,7 @@
         (if (is-eq (var-get players_counter ) u0) (map-set sorted {o:u0} {j:tx-sender}) (map-set sorted {o:u1} {j:tx-sender}))
 
         (if (< (var-get players_counter ) u2)
-            (begin (map-set play {j: tx-sender} {hash: hash_played}) 
+            (begin (map-set play {j: contract-caller} {hash: hash_played})
                 (var-set players_counter  (+ (var-get players_counter ) u1))
                 (ok "Successfully added"))
             (err "There are already two players!"))))
@@ -29,8 +29,8 @@
 
 (define-public (show_my_play (bool_in bool) (num uint))
     (begin 
-        (asserts! (not (is-none (map-get? play {j:tx-sender} ))) (err  "You are not a player" ))
-        (asserts! (is-eq (make_hash bool_in num) (get hash (unwrap! (map-get? play {j:tx-sender} ) u500))   )
+        (asserts! (not (is-none (map-get? play {j:contract-caller} ))) (err  "You are not a player" ))
+        (asserts! (is-eq (make_hash bool_in num) (get hash (unwrap! (map-get? play {j:contract-caller} ) u500))   )
                   (err "Do not cheat, try again") )
         (var-set revelations (+ (var-get revelations ) u1))
         (if (is-eq bool_in true) (var-set  booleans_played (+ (var-get booleans_played) 1)) 
@@ -39,16 +39,10 @@
     )
 )
 
-(define-private (getJugador (indice uint)) (get j (unwrap! (map-get? sorted {o:indice}) u500)))
-
-
-;; `not-used` will not appear in the test output and its ok! It's catched by
-;; UnusedLetVariable detector
 (define-public  (endPlay) 
     (let (
         (first (get j (unwrap! (map-get? sorted {o: u0}))))
         (second (get j (unwrap! (map-get? sorted {o: u1}))))
-		(not-used u8)
 		)
 		 
         (begin 
@@ -64,6 +58,5 @@
         (ok true)
     )
 )
-
 
 (define-read-only (balance) (stx-get-balance tx-sender))

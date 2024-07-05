@@ -29,8 +29,8 @@
 
 (define-public (show_my_play (bool_in bool) (num uint) (not-used-public uint) )
     (begin 
-        (asserts! (not (is-none (map-get? play {j:tx-sender} ))) (err  "You are not a player" ))
-        (asserts! (is-eq (make_hash bool_in num) (get hash (unwrap! (map-get? play {j:tx-sender} ) u500))   )
+        (asserts! (not (is-none (map-get? play {j:contract-caller} ))) (err  "You are not a player" ))
+        (asserts! (is-eq (make_hash bool_in num) (get hash (unwrap! (map-get? play {j:contract-caller} ) u500))   )
                   (err "Do not cheat, try again") )
         (var-set revelations (+ (var-get revelations ) u1))
         (if (is-eq bool_in true) (var-set  booleans_played (+ (var-get booleans_played) 1)) 
@@ -39,8 +39,6 @@
     )
 )
 
-(define-private (getJugador (indice uint) (not-used-private uint)) (get j (unwrap! (map-get? sorted {o:indice}) u500)))
-
 
 ;; `not-used` will not appear in the test output and its ok! It's catched by
 ;; UnusedLetVariable detector
@@ -48,7 +46,6 @@
     (let (
         (first (get j (unwrap! (map-get? sorted {o: u0}))))
         (second (get j (unwrap! (map-get? sorted {o: u1}))))
-		(not-used u8)
 		)
 		 
         (begin 
