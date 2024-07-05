@@ -55,7 +55,7 @@ test_ci: venv
 	@echo -e "${GREEN}======== Installing Stacy for Clarity ========${NC}"
 	./venv/bin/pip install $(PATH2)
 	@echo -e  "${GREEN}======== Testing detectors ========${NC}"
-	make unittest > $(GITHUB_WORKSPACE)/test.out
+	cd tests/ && python3 -m unittest test_module1 > $(GITHUB_WORKSPACE)/test.out && cd ..
 
 unittest: venv install
 	cd tests/ && python3 -m unittest test_module1 && cd ..
