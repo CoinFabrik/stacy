@@ -5,8 +5,8 @@ from stacy_analyzer.visitor import Visitor, NodeIterator
 
 class AssertBlockHeight(Visitor):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, print_output: bool = True):
+        super().__init__(print_output)
         self.MSG = "Use of block-height inside a assert."
         self.HELP = None
         self.FOOTNOTE = "Consider using burn-block-height."

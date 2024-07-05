@@ -5,8 +5,8 @@ from stacy_analyzer.visitor import Visitor
 
 class UnwrapPanicUsage(Visitor):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, print_output: bool = True):
+        super().__init__(print_output)
         self.MSG = "Use of unwrap-panic."
         self.FOOTNOTE = "Use unwrap! and handle the error."
         self.HELP = None

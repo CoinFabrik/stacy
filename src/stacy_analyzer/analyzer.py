@@ -80,12 +80,12 @@ class Analyzer:
             detectors = self.get_detectors(filters, excludes)
             path = user_args.path
             if path.endswith(".clar"):
-                self.lint_file(path, detectors)
+                self.lint_file(path, detectors, True)
             else:
                 for root, _, files in os.walk(path):
                     for file in files:
                         if file.endswith(".clar"):
-                            self.lint_file(os.path.join(root, file), detectors)
+                            self.lint_file(os.path.join(root, file), detectors, True)
 
         if user_args.command == "detectors":
             convert_camel_case = lambda s: s[0] + ''.join(' ' + c if c.isupper() else c for c in s[1:])
@@ -123,15 +123,16 @@ class Analyzer:
 
         return [self.DETECTOR_MAP[name] for name in filtered_names]
 
-    def lint_file(self, filename, lints: [Visitor]):
-        if self.isatty:
-            print(f"{TerminalColors.HEADER}====== Linting {filename}... ======{TerminalColors.ENDC}")
-        else:
-            print(f"====== Linting {filename}... ======")
+    def lint_file(self, filename, lints: [Visitor], print_output: bool):
+        if print_output:
+            if self.isatty:
+                print(f"{TerminalColors.HEADER}====== Linting {filename}... ======{TerminalColors.ENDC}")
+            else:
+                print(f"====== Linting {filename}... ======")
         with open(filename, 'r') as file:
             source = file.read()
 
-        runner: LinterRunner = LinterRunner(source, filename)
+        runner: LinterRunner = LinterRunner(source, print_output, filename)
         runner.add_lints(lints)
 
         findings: [Finding] = runner.run()

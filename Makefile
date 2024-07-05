@@ -57,8 +57,15 @@ test_ci: venv
 	@echo -e  "${GREEN}======== Testing detectors ========${NC}"
 	cd tests/ && ../venv/bin/python3 -m unittest test_module1 > $(GITHUB_WORKSPACE)/test.out && cd ..
 
-unittest: venv install
-	cd tests/ && python3 -m unittest test_module1 && cd ..
+.SILENT:unittest
+
+unittest:
+	python3 -m venv venv > /dev/null 2>&1
+	./venv/bin/pip uninstall stacy-analyzer -y > /dev/null 2>&1
+	git submodule update --recursive > /dev/null 2>&1
+	./venv/bin/pip install $(PATH1) > /dev/null 2>&1
+	./venv/bin/pip install $(PATH2) > /dev/null 2>&1
+	cd tests/ && python3 -m unittest test_module1
 
 fish: venv
 	@echo -e "${BLUE}======== Using Fish shell ========${NC}"

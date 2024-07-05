@@ -5,8 +5,8 @@ from stacy_analyzer.visitor import Visitor, NodeIterator
 
 class DivideBeforeMultiply(Visitor):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, print_output: bool = True):
+        super().__init__(print_output)
         self.MSG = "Use of divide inside a multiplication. This could result in a precision loss."
         self.FOOTNOTE = "Try multiplication before division."
         self.HELP = None

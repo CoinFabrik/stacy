@@ -35,10 +35,12 @@ class Visitor:
     MSG: str
     HELP: str | None
     FOOTNOTE: str | None
+    print_output: bool
 
-    def __init__(self):
+    def __init__(self, print_output: bool):
         self.source = self.src_name = None
         self.findings = []
+        self.print_output = print_output
 
     def add_source(self, src: str, src_name: str = None):
         self.source = src
@@ -52,7 +54,9 @@ class Visitor:
         return self.source.split('\n')
 
     def add_finding(self, node: Node, specific_node: Node):
-        pretty_print_warn(self, node, specific_node, self.MSG, self.HELP, self.FOOTNOTE)
+
+        if self.print_output:
+            pretty_print_warn(self, node, specific_node, self.MSG, self.HELP, self.FOOTNOTE)
 
         parent = node.parent
         line_number = parent.start_point.row + 1
@@ -129,7 +133,8 @@ class LinterRunner:
     lints: []  # lo que vaya acá adentro REQUIERE tener el metodo visit_node (at least) # XXX Happens to be a visitor=)
     round_number: int
 
-    def __init__(self, source: str, src_name: str = None):
+
+    def __init__(self, source: str, print_output: bool, src_name: str):
         self.src_name = src_name
         self.source = source
         parser = Parser(__CLARITY__)
@@ -138,6 +143,7 @@ class LinterRunner:
         self.iterator = NodeIterator(self.root_node)
         self.lints = []
         self.round_number = 0
+        self.print_output = print_output
 
     def run_lints(self, node: Node):
         for lint in self.lints:
@@ -149,7 +155,7 @@ class LinterRunner:
 
     def add_lints(self, lint_classes: [Visitor]):
         for lint_class in lint_classes:
-            lint = lint_class()
+            lint = lint_class(self.print_output)
             lint.add_source(self.source, self.src_name)
             self.lints.append(lint)
 
