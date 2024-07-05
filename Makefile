@@ -50,14 +50,8 @@ test: venv install
 test_ci: venv
 	@echo -e  "${GREEN}======== Cloning tree-sitter grammar for Clarity ========${NC}"
 	git submodule update --init --remote --recursive
-	@echo -e "${GREEN}======== Installing tree-sitter ========${NC}"
-	cd $(PATH1)
-	git checkout 6eb27feb606856e94bc0948b62c6ae2cb05a9700
-	npm install tree-sitter-cli
 	@echo -e "${GREEN}======== Installing tree-sitter grammar for Clarity ========${NC}"
-	cd $(PATH1) && npx tree-sitter generate
-	rm -fr node_modules
-	./venv/bin/pip install $(PATH1)
+	./venv/bin/pip install git+https://github.com/xlittlerag/tree-sitter-clarity.git@6eb27feb606856e94bc0948b62c6ae2cb05a9700
 	@echo -e "${GREEN}======== Installing Stacy for Clarity ========${NC}"
 	./venv/bin/pip install $(PATH2)
 	@echo -e  "${GREEN}======== Testing detectors ========${NC}"
