@@ -5,7 +5,7 @@
 - Detectors: [`unused-arguments`]()
 - Test Cases: [`unused-arguments`]()
 
-If you know that a parameter in a function will not be used, remove it. This will optimize the contract's code and reduce gas.
+If you know that a parameter passed to a function will not be used, remove it. This will optimize the contract's code and reduce gas.
 
 ## Exploit Scenario
 
