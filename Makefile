@@ -1,8 +1,9 @@
-TS_CLARITY_PATH = src/stacy_analyzer/tree-sitter-clarity
-REPO_ROOT = .
+PATH1 = src/stacy_analyzer/tree-sitter-clarity
+PATH2 = .
 
-.PHONY: venv fish bash ps1 csh install test_ci
-.SILENT: unittest
+.PHONY: venv fish bash ps1 csh install
+
+default: bash
 
 # ANSI escape codes for colors
 GREEN = \033[0;32m
@@ -12,7 +13,25 @@ NC = \033[0m
 default: bash
 
 venv:
-	python3 -m venv venv > /dev/null 2>&1
+	python3 -m venv venv
+
+action: venv
+	@echo -e  "${GREEN}======== Cloning tree-sitter grammar for Clarity ========${NC}"
+	git submodule update --recursive
+	@echo -e "${GREEN}======== Installing tree-sitter ========${NC}"
+	cd $(PATH1)
+	npm install tree-sitter-cli
+	@echo -e "${GREEN}======== Installing tree-sitter grammar for Clarity ========${NC}"
+	cd $(PATH1) && npx tree-sitter generate
+	rm -fr node_modules
+	./venv/bin/pip install $(PATH1)
+	@echo -e "${GREEN}======== Installing Stacy for Clarity ========${NC}"
+	./venv/bin/pip install $(PATH2)
+	@echo -e "${GREEN}======== Running Stacy for Clarity ========${NC}"
+	echo "\`\`\`" >  $(GITHUB_WORKSPACE)/report.out
+	./venv/bin/stacy-analyzer lint $(INPUT_TARGET) >> $(GITHUB_WORKSPACE)/report.out
+	echo "\`\`\`" >>  $(GITHUB_WORKSPACE)/report.out
+
 
 install: venv
 	@echo -e  "${GREEN}======== Removing previous install of Stacy ========${NC}"
@@ -20,26 +39,31 @@ install: venv
 	@echo -e  "${GREEN}======== Cloning tree-sitter grammar for Clarity ========${NC}"
 	git submodule update --recursive
 	@echo -e "${GREEN}======== Installing tree-sitter grammar for Clarity ========${NC}"
-	./venv/bin/pip install $(TS_CLARITY_PATH)
+	./venv/bin/pip install $(PATH1)
 	@echo -e "${GREEN}======== Installing Stacy for Clarity ========${NC}"
-	./venv/bin/pip install $(REPO_ROOT)
+	./venv/bin/pip install $(PATH2)
+
+test: venv install
+	@echo -e  "${GREEN}======== Testing detectors ========${NC}"
+	./tests.sh
 
 test_ci: venv
 	@echo -e  "${GREEN}======== Cloning tree-sitter grammar for Clarity ========${NC}"
 	git submodule update --init --remote --recursive
+	@echo -e "${GREEN}======== Installing tree-sitter ========${NC}"
+	cd $(PATH1)
+	npm install tree-sitter-cli
 	@echo -e "${GREEN}======== Installing tree-sitter grammar for Clarity ========${NC}"
-	./venv/bin/pip install git+https://github.com/xlittlerag/tree-sitter-clarity.git@6eb27feb606856e94bc0948b62c6ae2cb05a9700
+	cd $(PATH1) && npx tree-sitter generate
+	rm -fr node_modules
+	./venv/bin/pip install $(PATH1)
 	@echo -e "${GREEN}======== Installing Stacy for Clarity ========${NC}"
-	./venv/bin/pip install $(REPO_ROOT)
+	./venv/bin/pip install $(PATH2)
 	@echo -e  "${GREEN}======== Testing detectors ========${NC}"
-	cd tests/ && ../venv/bin/python3 -m unittest test_module1 > $(GITHUB_WORKSPACE)/test.out 2>&1 && cd ..
+	./tests.sh > $(GITHUB_WORKSPACE)/test.out
 
-unittest: venv
-	./venv/bin/pip uninstall stacy-analyzer -y > /dev/null 2>&1
-	git submodule update --recursive > /dev/null 2>&1
-	./venv/bin/pip install $(TS_CLARITY_PATH) > /dev/null 2>&1
-	./venv/bin/pip install $(REPO_ROOT) > /dev/null 2>&1
-	cd tests/ && python3 -m unittest test_module1
+unittest: venv install
+	cd tests/ && python3 -m unittest test_module1 && cd ..
 
 fish: venv
 	@echo -e "${BLUE}======== Using Fish shell ========${NC}"
