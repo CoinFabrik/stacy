@@ -25,14 +25,14 @@ class TestFind1Detector(unittest.TestCase):
                     a = Analyzer()
                     ret = a.lint_file(filename, [detector], False)
                     is_vulnerable_path = "vulnerable" in filename
-                    is_correct_detector = detector.Name.lower() in filename.replace('_', '')
+                    is_correct_detector = detector.__name__.lower() in filename.replace('_', '')
 
                     expected = "at least one" if (is_vulnerable_path and is_correct_detector) else "zero"
                     actual = len(ret)
 
                     self.assertTrue(
                         (actual >= 1 if (is_vulnerable_path and is_correct_detector) else actual == 0),
-                        f"Test failed for: {detector.Name} @ {filename}. \n"
+                        f"Test failed for: {detector.__name__} @ {filename}. \n"
                         f"Expected {expected} lint(s), but found {actual}. \n"
                         f"Lints: {ret}\n"
                     )

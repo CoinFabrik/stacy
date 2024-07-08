@@ -86,7 +86,7 @@ class Visitor:
 
         return False
 
-
     @property
     def Name(self):
-        return self.__class__.__name__
+        return self.__name__
+
