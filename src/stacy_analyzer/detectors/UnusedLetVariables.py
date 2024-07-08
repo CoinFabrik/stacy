@@ -1,5 +1,6 @@
 from tree_sitter import Node
-from stacy_analyzer.visitor import Visitor, NodeIterator
+from stacy_analyzer.visitor import Visitor
+from stacy_analyzer.node_iterator import NodeIterator
 
 
 class UnusedLetVariables(Visitor):
@@ -30,3 +31,4 @@ class UnusedLetVariables(Visitor):
                 self.HELP = ""
                 self.FOOTNOTE = f"Consider removing '{k}' from let function since its not used."
                 self.add_finding(v, v)
+

@@ -1,6 +1,7 @@
 from tree_sitter import Node
+from stacy_analyzer.visitor import Visitor
+from stacy_analyzer.node_iterator import NodeIterator
 
-from stacy_analyzer.visitor import Visitor, NodeIterator
 
 
 class TxSenderInAssert(Visitor):

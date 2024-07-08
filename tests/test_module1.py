@@ -13,12 +13,11 @@ class TestFind1Detector(unittest.TestCase):
         self.assertTrue(len(a.DETECTOR_MAP) == __DETECTOR_QUANTITY__, f"{a.DETECTOR_MAP}")
         print("Detector count is OK")
 
-
     def test_detector_file(self):
         p = '.'
         for root, dirs, files in os.walk(p):
             for name in files:
-                if not name.endswith('.clar'):
+                if not name.endswith('.clar') or name == "magic_comment.clar":
                     continue
                 filename = os.path.join(root, name)
                 a = Analyzer()
@@ -39,9 +38,8 @@ class TestFind1Detector(unittest.TestCase):
                     )
         print("All detectors tests passed")
 
-
     def test_profile_time(self):
-        filename = 'tx_sender_in_assert/vulnerable-example/tx_sender.clar'
+        filename = 'unused_arguments/vulnerable-example/unused_arguments.clar'
         a = Analyzer()
         lints = [detectorKlass for detectorKlass in a.DETECTOR_MAP.values()]
         start = time.time()
@@ -49,7 +47,7 @@ class TestFind1Detector(unittest.TestCase):
             a = Analyzer()
             a.lint_file(filename, [detectorKlass for detectorKlass in lints], False)
         end = time.time()
-        print(f'Running 1000 times `tx_sender` detector took: {end - start:f}s')
+        print(f'Running 1000 times in `unused_arguments` test case. Took: {end - start:f}s')
 
 
 if __name__ == '__main__':
