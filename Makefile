@@ -32,13 +32,13 @@ test_ci: venv
 	@echo -e "${GREEN}======== Installing Stacy for Clarity ========${NC}"
 	./venv/bin/pip install $(REPO_ROOT)
 	@echo -e  "${GREEN}======== Testing detectors ========${NC}"
-	make unittest > $(GITHUB_WORKSPACE)/test.out 2>&1
+	../venv/bin/python3 -m unittest test_module1 # > $(GITHUB_WORKSPACE)/test.out 2>&1 && cd ..
 
 unittest: venv
-	./venv/bin/pip uninstall stacy-analyzer -y
-	git submodule update --recursive
-	./venv/bin/pip install $(TS_CLARITY_PATH)
-	./venv/bin/pip install $(REPO_ROOT)
+	./venv/bin/pip uninstall stacy-analyzer -y # > /dev/null 2>&1
+	git submodule update --recursive # > /dev/null 2>&1
+	./venv/bin/pip install $(TS_CLARITY_PATH) # > /dev/null 2>&1
+	./venv/bin/pip install $(REPO_ROOT) # > /dev/null 2>&1
 	cd tests/ && python3 -m unittest test_module1
 
 fish: venv
