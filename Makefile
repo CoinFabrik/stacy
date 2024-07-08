@@ -32,7 +32,7 @@ test_ci: venv
 	@echo -e "${GREEN}======== Installing Stacy for Clarity ========${NC}"
 	./venv/bin/pip install $(REPO_ROOT)
 	@echo -e  "${GREEN}======== Testing detectors ========${NC}"
-	cd tests/ && ../venv/bin/python3 -m unittest test_module1 > $(GITHUB_WORKSPACE)/test.out 2>&1 && cd ..
+	cd tests && ../venv/bin/python3 -m unittest test_module1 > $(GITHUB_WORKSPACE)/test.out 2>&1 && cd ..
 
 unittest: venv
 	./venv/bin/pip uninstall stacy-analyzer -y > /dev/null 2>&1
