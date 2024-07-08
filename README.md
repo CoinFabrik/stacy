@@ -16,7 +16,6 @@ pip install stacy-analyzer
 ## Documentation
 
 - [Vulnerabilities](https://github.com/CoinFabrik/stacy/tree/main/docs/vulnerabilities)
-- [Guidelines](https://github.com/CoinFabrik/stacy/tree/main/docs/guidelines)
 
 ## Detectors
 
@@ -35,6 +34,10 @@ Severities are based on worst case scenarios and the detector's finding may vary
 | [unused-let-variables](https://github.com/CoinFabrik/stacy/blob/main/docs/vulnerabilities/11-unused-let-variables.md)                                          | Local variables declared but not used.                                                                         | [1](https://github.com/CoinFabrik/stacy/tree/main/tests/unused_let_variables)                                                                                                                                                                  | Enhancement |
 | [updated-functions](https://github.com/CoinFabrik/stacy/blob/main/docs/vulnerabilities/9-updated-functions.md)                                          | Old functions.                                                                         | [1](https://github.com/CoinFabrik/stacy/tree/main/tests/updated_functions)                                                                                                                                                                  | Enhancement |
 | [var-could-be-constant](https://github.com/CoinFabrik/stacy/blob/main/docs/vulnerabilities/7-var-could-be-constant.md)                                          | Code that does not change and could be re-define.                                                                         | [1](https://github.com/CoinFabrik/stacy/tree/main/tests/var_could_be_constant)                                                                                                                                                                  | Enhancement |
+
+## Contribution guildelines
+
+You can find our contribution guidelines [here](https://github.com/CoinFabrik/stacy/tree/main/docs/contribution_guidelines/contribute.md)
 
 
 ## About CoinFabrik
