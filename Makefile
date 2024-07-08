@@ -35,10 +35,10 @@ test_ci: venv
 	make unittest > $(GITHUB_WORKSPACE)/test.out 2>&1
 
 unittest: venv
-	./venv/bin/pip uninstall stacy-analyzer -y > /dev/null 2>&1
-	git submodule update --recursive > /dev/null 2>&1
-	./venv/bin/pip install $(TS_CLARITY_PATH) > /dev/null 2>&1
-	./venv/bin/pip install $(REPO_ROOT) > /dev/null 2>&1
+	./venv/bin/pip uninstall stacy-analyzer -y
+	git submodule update --recursive
+	./venv/bin/pip install $(TS_CLARITY_PATH)
+	./venv/bin/pip install $(REPO_ROOT)
 	cd tests/ && python3 -m unittest test_module1
 
 fish: venv
