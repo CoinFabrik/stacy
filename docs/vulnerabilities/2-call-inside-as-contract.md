@@ -2,7 +2,7 @@
 ## Description
 - Vulnerability Category: `Authorization`
 - Severity: `Critical`
-- Detectors: [`call-inside-as-contract`](https://github.com/CoinFabrik/stacy/blob/main/stacks_analyzer/detectors/CallInsideAsContract.py)
+- Detectors: [`call-inside-as-contract`](https://github.com/CoinFabrik/stacy/blob/main/src/stacy_analyzer/detectors/CallInsideAsContract.py)
 - Test Cases: [`call-inside-as-contract`](https://github.com/CoinFabrik/stacy/tree/main/tests/call_inside_as_contract)
 
 In `Clarity`, when executing a contract call, the `tx-sender` is the contract that initiated the call. This means that if a contract calls another contract, the `tx-sender` of the called contract will be the calling contract. This can be exploited by a malicious contract to impersonate another contract. 

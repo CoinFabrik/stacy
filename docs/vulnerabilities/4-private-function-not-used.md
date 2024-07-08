@@ -2,7 +2,7 @@
 ## Description
 - Vulnerability Category: `Validations and error handling`
 - Severity: `Enhancement`
-- Detectors: [`private-function-not-used`](https://github.com/CoinFabrik/stacy/blob/main/stacks_analyzer/detectors/PrivateFunctionNotUsed.py)
+- Detectors: [`private-function-not-used`](https://github.com/CoinFabrik/stacy/blob/main/src/stacy_analyzer/detectors/PrivateFunctionNotUsed.py)
 - Test Cases: [`private-function-not-used`](https://github.com/CoinFabrik/stacy/tree/main/tests/private_function_not_used)
 
 It is not a good practice to have code that is not used. This can lead to confusion and increase the size of the contract. In addition, it can also create vulnerabilities if a malicious actor finds a way to call the private functions.

@@ -2,7 +2,7 @@
 ## Description
 - Vulnerability Category: `Arithmetic`
 - Severity: `Medium`
-- Detectors: [`divide-before-multiply`](https://github.com/CoinFabrik/stacy/blob/main/stacks_analyzer/detectors/DivideBeforeMultiply.py)
+- Detectors: [`divide-before-multiply`](https://github.com/CoinFabrik/stacy/blob/main/src/stacy_analyzer/detectors/DivideBeforeMultiply.py)
 - Test Cases: [`divide-before-multiply`](https://github.com/CoinFabrik/stacy/tree/main/tests/divide_before_multiply)
 
 In `Clarity`, decimals are dropped after an arithmetic operation. This can lead to an undesired loss of precision if the order of operations is not correct. 

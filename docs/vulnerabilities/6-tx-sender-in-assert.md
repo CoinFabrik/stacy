@@ -2,7 +2,7 @@
 ## Description
 - Vulnerability Category: `Authorization`
 - Severity: `High`
-- Detectors: [`tx-sender-in-assert`](https://github.com/CoinFabrik/stacy/blob/main/stacks_analyzer/detectors/TxSenderInAssert.py)
+- Detectors: [`tx-sender-in-assert`](https://github.com/CoinFabrik/stacy/blob/main/src/stacy_analyzer/detectors/TxSenderInAssert.py)
 - Test Cases: [`tx-sender-in-assert`](https://github.com/CoinFabrik/stacy/tree/main/tests/tx_sender_in_assert)
 
 In `Clarity`, the `tx-sender` keyword is used to get the principal of the current transaction. 

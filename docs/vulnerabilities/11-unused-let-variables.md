@@ -1,9 +1,9 @@
-# Unwrap Panic Usage 
+# Unused Let Variables
 ## Description
 - Vulnerability Category: `Best practices`
 - Severity: `Enhancement`
-- Detectors: [`unused-let-variables`]()
-- Test Cases: [`unused-let-variables`]()
+- Detectors: [`unused-let-variables`](https://github.com/CoinFabrik/stacy/blob/main/src/stacy_analyzer/detectors/UnusedLetVariables.py)
+- Test Cases: [`unused-let-variables`](https://github.com/CoinFabrik/stacy/tree/main/tests/unused_let_variables)
 
 Do not declare variables inside a `let` function if you will not used it. This will optimize the contract's code and reduce gas.
 
@@ -33,7 +33,7 @@ Do not declare variables inside a `let` function if you will not used it. This w
 ```
 
 
-The vulnerable code example can be found [here]().
+The vulnerable code example can be found [here](https://github.com/CoinFabrik/stacy/blob/main/tests/unused_let_variables/vulnerable-example/unused_let_variables.clar).
 
 ## Remediation
 
@@ -61,7 +61,7 @@ The vulnerable code example can be found [here]().
 
 ```
 
-The remediated code example can be found [here]().
+The remediated code example can be found [here](https://github.com/CoinFabrik/stacy/blob/main/tests/unused_let_variables/remediated-example/unused_let_variables.clar).
 
 
 
