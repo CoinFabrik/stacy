@@ -1,4 +1,4 @@
-# Unwrap Panic Usage 
+# Updated Functions
 ## Description
 - Vulnerability Category: `Best practices`
 - Severity: `Enhancement`
