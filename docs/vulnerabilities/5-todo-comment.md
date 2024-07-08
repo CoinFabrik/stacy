@@ -2,7 +2,7 @@
 ## Description
 - Vulnerability Category: `Best practices`
 - Severity: `Enhancement`
-- Detectors: [`todo-comment`](https://github.com/CoinFabrik/stacy/blob/main/stacks_analyzer/detectors/ToDoComment.py)
+- Detectors: [`todo-comment`](https://github.com/CoinFabrik/stacy/blob/main/src/stacy_analyzer/detectors/ToDoComment.py)
 - Test Cases: [`todo-comment`](https://github.com/CoinFabrik/stacy/tree/main/tests/todo_comment)
 
 As a best practice, it is recommended to remove `TODO` comments from the code. 

@@ -130,7 +130,7 @@ class LinterRunner:
     tree: Tree
     root_node: Node
     iterator: NodeIterator
-    lints: []  # lo que vaya acá adentro REQUIERE tener el metodo visit_node (at least) # XXX Happens to be a visitor=)
+    lints: []  # elements in lints MUST HAVE the visit_node method (at least) # XXX Happens to be a visitor=)
     round_number: int
 
 

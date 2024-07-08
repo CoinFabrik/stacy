@@ -1,8 +1,8 @@
-# Unwrap Panic Usage 
+# Updated Functions
 ## Description
 - Vulnerability Category: `Best practices`
 - Severity: `Enhancement`
-- Detectors: [`updated-functions`](https://github.com/CoinFabrik/stacy/blob/main/stacks_analyzer/detectors/UpdatedFunctionsDetector.py)
+- Detectors: [`updated-functions`](https://github.com/CoinFabrik/stacy/blob/main/src/stacy_analyzer/detectors/UpdatedFunctions.py)
 - Test Cases: [`updated-functions](https://github.com/CoinFabrik/stacy/tree/main/tests/updated_functions)
 
 `element-at` and `index-of` are functions that changed their output signature from Clarity-1 to Clarity-2.

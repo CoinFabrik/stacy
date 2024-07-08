@@ -2,7 +2,7 @@
 ## Description
 - Vulnerability Category: `Block attributes`
 - Severity: `Critical`
-- Detectors: [`assert-block-height`](https://github.com/CoinFabrik/stacy/blob/main/stacks_analyzer/detectors/AssertBlockHeight.py)
+- Detectors: [`assert-block-height`](https://github.com/CoinFabrik/stacy/blob/main/src/stacy_analyzer/detectors/AssertBlockHeight.py)
 - Test Cases: [`assert-block-height`](https://github.com/CoinFabrik/stacy/tree/main/tests/assert_block_height)
 
 Since there is no exact method to measure time events in Stacks blockchain,`Clarity` gives you two options: `block-height` and `burn-block-height`. The main different between them is that `block-height` is based on Stacks blockchain and `burn-block-height` is based on the underlying Bitcoin blockchain.

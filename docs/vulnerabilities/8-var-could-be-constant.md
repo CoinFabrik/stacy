@@ -2,7 +2,7 @@
 ## Description
 - Vulnerability Category: `Validations and error handling`
 - Severity: `Enhancement`
-- Detectors: [`var-could-be-constant`](https://github.com/CoinFabrik/stacy/blob/main/stacks_analyzer/detectors/VarCouldBeConstant.py)
+- Detectors: [`var-could-be-constant`](https://github.com/CoinFabrik/stacy/blob/main/src/stacy_analyzer/detectors/VarCouldBeConstant.py)
 - Test Cases: [`var-could-be-constant`](https://github.com/CoinFabrik/stacy/tree/main/tests/var_could_be_constant)
 
 If you know that a variable will not change its value, you can declare it as a constant. This will optimize the contract's code.
