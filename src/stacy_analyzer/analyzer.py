@@ -56,7 +56,7 @@ class Analyzer:
         user_args = arg_parser.parse_args()
         if user_args.command == "lint":
             filters = list(self.DETECTOR_MAP.keys()) if user_args.filter is None else user_args.filter[0].split(',')
-            excludes = [] if user_args.exclude is None else user_args.exclude.split(',')
+            excludes = [] if user_args.exclude is None else user_args.exclude[0].split(',')
             detectors = self.get_detectors(filters, excludes)
             path = user_args.path
             if path.endswith(".clar"):
