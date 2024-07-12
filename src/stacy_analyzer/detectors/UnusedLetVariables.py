@@ -32,3 +32,5 @@ class UnusedLetVariables(Visitor):
                 self.FOOTNOTE = f"Consider removing '{k}' from let function since its not used."
                 self.add_finding(v, v)
 
+        self.arguments = {}
+
