@@ -40,6 +40,14 @@ Severities are based on worst case scenarios and the detector's finding may vary
 You can find our contribution guidelines [here](https://github.com/CoinFabrik/stacy/tree/main/docs/contribution_guidelines/contribute.md)
 
 
+## Testing Stacy
+
+You can run Stacy over all your contracts by running the following command:
+
+```shell stacy-analyzer lint tests```
+
+It will recursively search for all the `.clar` files in the `tests` directory and run Stacy over them. With this command, you wont need to specify the path to each smart contract.
+
 ## About CoinFabrik
 
 We - [CoinFabrik](https://www.coinfabrik.com/) - are a research and development company specialized in Web3, with a strong background in cybersecurity. Founded in 2014, we have worked on over 180 blockchain-related projects, EVM based and also for Solana, Algorand, and Polkadot. Beyond development, we offer security audits through a dedicated in-house team of senior cybersecurity professionals, currently working on code in Substrate, Solidity, Clarity, Rust, and TEAL.
