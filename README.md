@@ -44,7 +44,9 @@ You can find our contribution guidelines [here](https://github.com/CoinFabrik/st
 
 You can run Stacy over all your contracts by running the following command:
 
-```shell stacy-analyzer lint tests```
+```shell
+stacy-analyzer lint tests
+```
 
 It will recursively search for all the `.clar` files in the `tests` directory and run Stacy over them. With this command, you wont need to specify the path to each smart contract.
 
