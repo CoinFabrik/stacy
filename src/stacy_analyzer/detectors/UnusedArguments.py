@@ -34,3 +34,5 @@ class UnusedArguments(Visitor):
                 self.HELP = None
                 self.FOOTNOTE = f"Consider removing '{k}' since its not used inside the function."
                 self.add_finding(v, v)
+
+            self.arguments = {}
