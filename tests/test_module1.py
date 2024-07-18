@@ -23,7 +23,7 @@ class TestFind1Detector(unittest.TestCase):
                 a = Analyzer()
                 for detector in a.DETECTOR_MAP.values():
                     a = Analyzer()
-                    ret = a.lint_file(filename, [detector], False)
+                    ret = a.lint_file(filename, [detector], False, 0, 0)
                     is_vulnerable_path = "vulnerable" in filename
                     is_correct_detector = detector.__name__.lower() in filename.replace('_', '')
 
@@ -45,7 +45,7 @@ class TestFind1Detector(unittest.TestCase):
         start = time.time()
         for _ in range(1000):
             a = Analyzer()
-            a.lint_file(filename, [detectorKlass for detectorKlass in lints], False)
+            a.lint_file(filename, [detectorKlass for detectorKlass in lints], False, 0, 0)
         end = time.time()
         print(f'Running 1000 times in `unused_arguments` test case. Took: {end - start:f}s')
 

@@ -40,9 +40,10 @@ class LinterRunner:
         self.lints.append(lint)
         return self
 
-    def add_lints(self, lint_classes: [Visitor]):
+    def add_lints(self, lint_classes: [Visitor], leading: int, trailing: int):
         for lint_class in lint_classes:
             lint = lint_class(self.print_output)
+            lint.set_context(leading, trailing)
             lint.add_source(self.source, self.src_name)
             self.lints.append(lint)
 
