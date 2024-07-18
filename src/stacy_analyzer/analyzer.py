@@ -43,21 +43,48 @@ class Analyzer:
         self.isatty = sys.stdout.isatty()
 
     def main(self):
-        arg_parser = argparse.ArgumentParser(description='Static Analyzer for the Clarity language from Stacks')
-        subparsers = arg_parser.add_subparsers(dest="command", help="Commands")
+        def comma_separated_list(value):
+            return value.split(',')
 
-        lint_parser = subparsers.add_parser("lint", help="Run detectors in a given contract or contracts directory")
-        lint_parser.add_argument("path", type=str, help="Path")
-        lint_parser.add_argument("--filter", nargs="+", type=str, help="Comma-separated list of detector names to use")
-        lint_parser.add_argument("--exclude", nargs="+", type=str,
-                                 help="Comma-separated list of detector names to exclude")
-        list_detectors = subparsers.add_parser("detectors", help="List detectors")
-        lint_parser.add_argument("-A", nargs="+", type=int,
-                                 help="Print A lines of trailing context after findings.")
-        lint_parser.add_argument("-B", nargs="+", type=int,
-                                 help="Print B lines of leading context before findings.")
-        lint_parser.add_argument("-C", nargs="+", type=int,
-                                 help="Print C lines of leading and trailing context after and before findings. Takes precedence over -A and -B")
+        class StacyParser(argparse.ArgumentParser):
+            def format_help(self):
+                formatter = self._get_formatter()
+                formatter.add_text(self.description)
+                formatter.add_usage(self.usage, self._actions,
+                                    self._mutually_exclusive_groups)
+                formatter.add_text(self.epilog)
+
+                # Add subparsers help
+                subparsers_actions = [
+                    action for action in self._actions
+                    if isinstance(action, argparse._SubParsersAction)]
+                for subparsers_action in subparsers_actions:
+                    for choice, subparser in subparsers_action.choices.items():
+                        formatter.start_section(f"{choice} subcommand")
+                        formatter.add_text(subparser.description)
+                        formatter.add_arguments(subparser._actions)
+                        formatter.end_section()
+
+                return formatter.format_help()
+
+        arg_parser = StacyParser(description='Static Analyzer for the Clarity language from Stacks')
+        subparsers = arg_parser.add_subparsers(dest="command", help="Available commands")
+
+        lint_parser = subparsers.add_parser("lint", help="Run detectors on a given contract or contracts directory")
+        lint_parser.add_argument("path", type=str, help="Path to the contract file or directory")
+        lint_parser.add_argument("--filter", type=comma_separated_list, metavar="lint1,lint2,...",
+                                 help="List of detector names to use")
+        lint_parser.add_argument("--exclude", type=comma_separated_list, metavar="lint1,lint2,...",
+                                 help="List of detector names to exclude")
+        lint_parser.add_argument("-A", type=int, metavar="x",
+                                 help="Print x lines of trailing context after findings")
+        lint_parser.add_argument("-B", type=int, metavar="x",
+                                 help="Print x lines of leading context before findings")
+        lint_parser.add_argument("-C", type=int, metavar="x",
+                                 help="Print x lines of leading and trailing context (overrides -A and -B)")
+
+        list_detectors = subparsers.add_parser("detectors", help="List available detectors")
+
         user_args = arg_parser.parse_args()
         if user_args.command == "lint":
 
@@ -65,17 +92,17 @@ class Analyzer:
             lc = 0
 
             if user_args.A is not None:
-                tc = user_args.A[0]
+                tc = user_args.A
 
             if user_args.B is not None:
-                lc = user_args.B[0]
+                lc = user_args.B
 
             if user_args.C is not None:
-                tc = user_args.C[0]
-                lc = user_args.C[0]
+                tc = user_args.C
+                lc = user_args.C
 
-            filters = list(self.DETECTOR_MAP.keys()) if user_args.filter is None else user_args.filter[0].split(',')
-            excludes = [] if user_args.exclude is None else user_args.exclude[0].split(',')
+            filters = list(self.DETECTOR_MAP.keys()) if user_args.filter is None else user_args.filter
+            excludes = [] if user_args.exclude is None else user_args.exclude
             detectors = self.get_detectors(filters, excludes)
             path = user_args.path
             if path.endswith(".clar"):
