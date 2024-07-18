@@ -52,20 +52,39 @@ class Analyzer:
         lint_parser.add_argument("--exclude", nargs="+", type=str,
                                  help="Comma-separated list of detector names to exclude")
         list_detectors = subparsers.add_parser("detectors", help="List detectors")
-
+        lint_parser.add_argument("-A", nargs="+", type=int,
+                                 help="Print A lines of trailing context after findings.")
+        lint_parser.add_argument("-B", nargs="+", type=int,
+                                 help="Print B lines of leading context before findings.")
+        lint_parser.add_argument("-C", nargs="+", type=int,
+                                 help="Print C lines of leading and trailing context after and before findings. Takes precedence over -A and -B")
         user_args = arg_parser.parse_args()
         if user_args.command == "lint":
+
+            tc = 0
+            lc = 0
+
+            if user_args.A is not None:
+                tc = user_args.A[0]
+
+            if user_args.B is not None:
+                lc = user_args.B[0]
+
+            if user_args.C is not None:
+                tc = user_args.C[0]
+                lc = user_args.C[0]
+
             filters = list(self.DETECTOR_MAP.keys()) if user_args.filter is None else user_args.filter[0].split(',')
             excludes = [] if user_args.exclude is None else user_args.exclude[0].split(',')
             detectors = self.get_detectors(filters, excludes)
             path = user_args.path
             if path.endswith(".clar"):
-                self.lint_file(path, detectors, True)
+                self.lint_file(path, detectors, True, lc, tc)
             else:
                 for root, _, files in os.walk(path):
                     for file in files:
                         if file.endswith(".clar"):
-                            self.lint_file(os.path.join(root, file), detectors, True)
+                            self.lint_file(os.path.join(root, file), detectors, True, lc, tc)
 
         if user_args.command == "detectors":
             convert_camel_case = lambda s: s[0] + ''.join(' ' + c if c.isupper() else c for c in s[1:])
@@ -103,7 +122,8 @@ class Analyzer:
 
         return [self.DETECTOR_MAP[name] for name in filtered_names]
 
-    def lint_file(self, filename, lints: [Visitor], print_output: bool):
+    def lint_file(self, filename, lints: [Visitor], print_output: bool, leading: int, trailing: int):
+
         if print_output:
             if self.isatty:
                 print(f"{TerminalColors.HEADER}====== Linting {filename}... ======{TerminalColors.ENDC}")
@@ -113,7 +133,7 @@ class Analyzer:
             source = file.read()
 
         runner: LinterRunner = LinterRunner(source, print_output, filename)
-        runner.add_lints(lints)
+        runner.add_lints(lints, leading, trailing)
 
         findings: [Finding] = runner.run()
 

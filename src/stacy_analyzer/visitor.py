@@ -4,7 +4,8 @@ from typing import Optional
 from tree_sitter import Node
 
 from stacy_analyzer.print_message import pretty_print_warn
-
+LEADING_CONTEXT = 0
+TRAILING_CONTEXT = 0
 
 @dataclass
 class Location:
@@ -32,12 +33,18 @@ class Visitor:
     FOOTNOTE: str | None
     print_output: bool
     ignores: dict[str, ([int], Node)]
+    leading_context: int
+    trailing_context: int
 
-    def __init__(self, print_output: bool):
+    def __init__(self, print_output: bool, ):
         self.ignores = {}
         self.source = self.src_name = None
         self.findings = []
         self.print_output = print_output
+
+    def set_context(self, leading: int, trailing: int):
+        self.leading_context = leading
+        self.trailing_context = trailing
 
     def add_source(self, src: str, src_name: str = None):
         self.source = src
@@ -58,7 +65,7 @@ class Visitor:
             return
 
         if self.print_output:
-            pretty_print_warn(self, node, specific_node, self.MSG, self.HELP, self.FOOTNOTE)
+            pretty_print_warn(self, node, specific_node, self.MSG, self.HELP, self.FOOTNOTE, self.leading_context, self.trailing_context)
 
         parent = node.parent
         line_number = parent.start_point.row + 1
