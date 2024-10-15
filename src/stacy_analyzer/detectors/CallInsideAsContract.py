@@ -11,7 +11,7 @@ class CallInsideAsContract(Visitor):
         self.call = False
         self.lit = False
         self.checked = []
-        self.MSG = "Use of call-contract? inside an as-contract context."
+        self.MSG = "Use of contract-call? inside an as-contract context."
         self.HELP = None
         self.FOOTNOTE = None
 

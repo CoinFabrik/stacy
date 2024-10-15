@@ -32,7 +32,7 @@ if __name__=="__main__":
             "Topic :: Utilities"
         ],
         python_requires='>=3.6',
-        install_requires=['tree-sitter', 'tree-sitter-clarity'],
+        install_requires=['tree-sitter', 'ts-clarity==0.0.4'],
         entry_points={
             'console_scripts': [  # This can provide executable scripts
                 'stacy-analyzer=stacy_analyzer:main',
