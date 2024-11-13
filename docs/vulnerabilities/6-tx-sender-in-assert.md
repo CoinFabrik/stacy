@@ -38,4 +38,4 @@ The remediated code example can be found [here](https://github.com/CoinFabrik/st
 
 
 ## References
-- [tx-sender](https://docs.stacks.co/clarity/keywords#tx-sender)
+- [tx-sender](https://docs.stacks.co/reference/keywords#tx-sender)
